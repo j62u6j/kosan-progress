@@ -26,6 +26,29 @@ const stages = [
   }
 ];
 
+const statusSummary = [
+  {
+    label: "目前階段",
+    value: "修正後送大會",
+    text: "第 6 次專案小組已審竣"
+  },
+  {
+    label: "下一關",
+    value: "內政部都委會大會",
+    text: "待補充資料與排入議程"
+  },
+  {
+    label: "最新官方更新",
+    value: "115.04.28",
+    text: "議會質詢更新目前進度"
+  },
+  {
+    label: "最該追蹤",
+    value: "大會排程",
+    text: "是否進入內政部都委會大會"
+  }
+];
+
 const riskSignals = [
   {
     level: "green",
@@ -50,6 +73,72 @@ const riskSignals = [
     title: "後續開發期程",
     status: "尚未明確",
     text: "大會尚未通過，區段徵收、工程、招商與開發時程仍需後續公告。"
+  }
+];
+
+const briefCards = [
+  {
+    title: "科三在哪裡？",
+    text: "位於新竹縣竹東鎮頭重里、二重里、三重里及柯湖里部分地區，屬竹科周邊科技廊帶討論的一環。"
+  },
+  {
+    title: "現在到哪一步？",
+    text: "目前已完成內政部都委會第 6 次專案小組討論，縣府補充與修正資料後，將送內政部都委會大會。"
+  },
+  {
+    title: "下一步是什麼？",
+    text: "最重要的是內政部都委會大會是否排入議程，以及大會審議結果是否通過或要求再補正。"
+  },
+  {
+    title: "面積有多大？",
+    text: "主要計畫面積約 453.94 公頃，約 4.54 平方公里；預計區段徵收開發範圍約 304.38 公頃。"
+  },
+  {
+    title: "主要關切是什麼？",
+    text: "常見關切包含水源保護、污水處理、產業類型、交通負荷、土地徵收、公共設施與居民意見處理。"
+  },
+  {
+    title: "看哪裡最準？",
+    text: "以新竹縣政府、內政部都委會、國土管理署與新竹縣都市計畫網等官方公開資料為準。"
+  }
+];
+
+const topicGuides = [
+  {
+    title: "都市計畫程序",
+    status: "中央大會前",
+    text: "已完成縣都委會、土徵公益性審查及第 6 次專案小組。下一步是送內政部都委會大會。",
+    watch: "追蹤大會議程、會議紀錄與審議結論。"
+  },
+  {
+    title: "土地徵收與開發",
+    status: "尚未進入實質開發",
+    text: "官方資料顯示預計區段徵收範圍約 304.38 公頃，但仍待中央都市計畫審議結果。",
+    watch: "追蹤區段徵收公告、用地取得、補償與安置資訊。"
+  },
+  {
+    title: "水源與污水",
+    status: "高度關注",
+    text: "因涉及自來水水質水量保護區，產業類型與污水處理方式是重要審議與民眾關切項目。",
+    watch: "追蹤污水處理、專管排放、環境保護與水源安全說明。"
+  },
+  {
+    title: "產業專用區",
+    status: "需看產業限制",
+    text: "官方 FAQ 說明原則朝低污染、資訊研發及農業生技等方向，仍須符合相關法規限制。",
+    watch: "追蹤產業類別、招商方向、污染管制與用地配置。"
+  },
+  {
+    title: "交通與公共設施",
+    status: "待後續細化",
+    text: "若進入後續開發程序，道路系統、聯外交通、學校、社福與公共設施配置會更重要。",
+    watch: "追蹤道路、公共設施用地、交通影響與地方生活機能。"
+  },
+  {
+    title: "民眾參與與資訊公開",
+    status: "需持續更新",
+    text: "早期已辦理公開展覽、說明會與問卷；後續仍需看官方是否公布新會議紀錄與意見處理。",
+    watch: "追蹤公開資料、會議紀錄、說明會與地方回應。"
   }
 ];
 
@@ -540,6 +629,17 @@ function credibilityLabel(level) {
   return labels[level] || "資料來源";
 }
 
+function renderStatusSummary() {
+  const target = document.querySelector("#statusStrip");
+  target.innerHTML = statusSummary.map((item) => `
+    <article>
+      <span>${item.label}</span>
+      <strong>${item.value}</strong>
+      <p>${item.text}</p>
+    </article>
+  `).join("");
+}
+
 function renderLatestUpdates() {
   const target = document.querySelector("#latestGrid");
   target.innerHTML = latestUpdates.map((update, index) => `
@@ -548,6 +648,29 @@ function renderLatestUpdates() {
       <h3>${update.title}</h3>
       <p>${update.text}</p>
       <a href="${update.url}" target="_blank" rel="noopener">${update.source}</a>
+    </article>
+  `).join("");
+}
+
+function renderBriefCards() {
+  const target = document.querySelector("#briefGrid");
+  target.innerHTML = briefCards.map((card, index) => `
+    <article class="brief-card">
+      <span>${String(index + 1).padStart(2, "0")}</span>
+      <h3>${card.title}</h3>
+      <p>${card.text}</p>
+    </article>
+  `).join("");
+}
+
+function renderTopicGuides() {
+  const target = document.querySelector("#topicGrid");
+  target.innerHTML = topicGuides.map((topic) => `
+    <article class="topic-card">
+      <span class="topic-status">${topic.status}</span>
+      <h3>${topic.title}</h3>
+      <p>${topic.text}</p>
+      <strong>${topic.watch}</strong>
     </article>
   `).join("");
 }
@@ -742,7 +865,10 @@ function renderChangelog() {
 document.querySelector("#recordFilter").addEventListener("change", renderRecords);
 document.querySelector("#recordSearch").addEventListener("input", renderRecords);
 
+renderStatusSummary();
 renderLatestUpdates();
+renderBriefCards();
+renderTopicGuides();
 renderRisks();
 renderStages();
 renderTimeline();
