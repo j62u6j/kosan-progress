@@ -104,6 +104,104 @@ const forecasts = [
   }
 ];
 
+const processSteps = [
+  {
+    title: "公開展覽與說明會",
+    date: "107.05-06",
+    status: "done",
+    text: "完成都市計畫公開展覽 30 天及公開展覽說明會。"
+  },
+  {
+    title: "民眾意見與問卷",
+    date: "107.07-11",
+    status: "done",
+    text: "聽取陳情意見，辦理土地所有權人問卷調查。"
+  },
+  {
+    title: "新竹縣都委會",
+    date: "108.05",
+    status: "done",
+    text: "第 303 次會議審議修正後通過，提報內政部。"
+  },
+  {
+    title: "土徵公益性審查",
+    date: "114.08",
+    status: "done",
+    text: "內政部土徵小組同意完成公益性及必要性評估審查。"
+  },
+  {
+    title: "內政部專案小組",
+    date: "115.03",
+    status: "current",
+    text: "第 6 次專案小組已審竣，補充資料後送大會。"
+  },
+  {
+    title: "內政部都委會大會",
+    date: "待公告",
+    status: "next",
+    text: "下一個重大節點，待排入大會審議。"
+  },
+  {
+    title: "核定公告與開發程序",
+    date: "後續",
+    status: "pending",
+    text: "大會通過後才會進入核定、用地、工程與開發程序。"
+  }
+];
+
+const mapAreas = [
+  {
+    id: "core",
+    label: "科三計畫區",
+    x: 54,
+    y: 48,
+    type: "核心範圍",
+    title: "竹東頭重、二重、三重、柯湖一帶",
+    text: "官方計畫區位於竹東鎮頭重里、二重里、三重里及柯湖里部分地區。此處以示意方式標示核心追蹤範圍。",
+    note: "正式範圍以都市計畫圖資與政府公告為準。"
+  },
+  {
+    id: "zhudong",
+    label: "竹東鎮",
+    x: 30,
+    y: 62,
+    type: "行政區",
+    title: "竹東鎮",
+    text: "科三計畫位於竹東鎮部分里別，後續交通、住宅、公共設施與生活機能都與竹東發展高度相關。",
+    note: "可搭配官方都市計畫圖與分區查詢確認細節。"
+  },
+  {
+    id: "hsinchu",
+    label: "新竹市/竹科",
+    x: 18,
+    y: 30,
+    type: "周邊節點",
+    title: "新竹市與既有竹科生活圈",
+    text: "科三定位與新竹科技廊帶、既有產業聚落及交通需求相關，是後續產業配置討論的背景之一。",
+    note: "本圖只標示相對關係，不代表交通距離比例。"
+  },
+  {
+    id: "water",
+    label: "水源保護議題",
+    x: 72,
+    y: 36,
+    type: "環境議題",
+    title: "自來水水質水量保護區限制",
+    text: "官方 FAQ 說明產業類型與污水處理需符合相關限制，這是科三後續審議和民眾關注的重要面向。",
+    note: "應持續追蹤污水處理、排放專管與產業類型限制。"
+  },
+  {
+    id: "road",
+    label: "交通串聯",
+    x: 67,
+    y: 70,
+    type: "交通議題",
+    title: "道路與交通串聯",
+    text: "後續若進入開發程序，道路系統、聯外交通與公共設施配置會成為重要追蹤項目。",
+    note: "目前仍待中央大會審議後，才會有更明確的後續推進資訊。"
+  }
+];
+
 const watchlist = [
   {
     title: "內政部都委會大會審議",
@@ -504,6 +602,48 @@ function renderForecasts() {
   `).join("");
 }
 
+function renderProcessFlow() {
+  const target = document.querySelector("#processFlow");
+  target.innerHTML = processSteps.map((step, index) => `
+    <article class="process-step ${step.status}">
+      <div class="process-index">${index + 1}</div>
+      <span class="process-date">${step.date}</span>
+      <h3>${step.title}</h3>
+      <p>${step.text}</p>
+    </article>
+  `).join("");
+}
+
+function renderProjectMap(selectedId = "core") {
+  const map = document.querySelector("#projectMap");
+  const detail = document.querySelector("#mapDetail");
+  const selected = mapAreas.find((area) => area.id === selectedId) || mapAreas[0];
+
+  map.innerHTML = `
+    <div class="map-river" aria-hidden="true"></div>
+    <div class="map-road main-road" aria-hidden="true"></div>
+    <div class="map-road branch-road" aria-hidden="true"></div>
+    <div class="map-zone zone-core" aria-hidden="true">科三示意範圍</div>
+    <div class="map-zone zone-city" aria-hidden="true">新竹生活圈</div>
+    ${mapAreas.map((area) => `
+      <button class="map-marker ${area.id === selected.id ? "active" : ""}" style="left:${area.x}%; top:${area.y}%;" data-map-id="${area.id}" aria-label="${area.label}">
+        <span>${area.label}</span>
+      </button>
+    `).join("")}
+  `;
+
+  detail.innerHTML = `
+    <span class="map-type">${selected.type}</span>
+    <h3>${selected.title}</h3>
+    <p>${selected.text}</p>
+    <strong>${selected.note}</strong>
+  `;
+
+  map.querySelectorAll(".map-marker").forEach((button) => {
+    button.addEventListener("click", () => renderProjectMap(button.dataset.mapId));
+  });
+}
+
 function renderWatchlist() {
   const target = document.querySelector("#watchlistGrid");
   target.innerHTML = watchlist.map((item) => `
@@ -606,6 +746,8 @@ renderRisks();
 renderStages();
 renderTimeline();
 renderForecasts();
+renderProcessFlow();
+renderProjectMap();
 renderWatchlist();
 renderLandUse();
 renderRecords();
