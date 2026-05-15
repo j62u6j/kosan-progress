@@ -4,6 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新竹科學園區三期（科三）進度追蹤</title>
+    <meta name="description" content="整理新竹科學園區三期（科三）官方公開資料、最新進度、風險燈號、下一步流程與政府文件搜尋。">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="新竹科學園區三期（科三）進度追蹤">
+    <meta property="og:description" content="一眼掌握科三計畫目前進度：第 6 次專案小組已審竣，補充資料後送內政部都委會大會。">
+    <meta property="og:url" content="https://j62u6j.github.io/kosan-progress/">
+    <meta property="og:site_name" content="科三進度追蹤">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="新竹科學園區三期（科三）進度追蹤">
+    <meta name="twitter:description" content="整理科三計畫官方公開資料、最新進度、風險燈號與下一步流程。">
+    <meta name="theme-color" content="#15312d">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -18,6 +28,7 @@
           <a href="#forecast">下一步</a>
           <a href="#records">文件搜尋</a>
           <a href="#landuse">土地配置</a>
+          <a href="#updates">變更紀錄</a>
           <a href="#sources">來源</a>
         </div>
       </nav>
@@ -80,6 +91,15 @@
           <p>用綠、黃、紅快速標示每個面向的狀態。黃燈不代表失敗，而是表示需要持續追蹤官方下一次動作。</p>
         </div>
         <div class="risk-grid" id="riskGrid"></div>
+      </section>
+
+      <section class="section compact-section" id="latest">
+        <div class="section-heading">
+          <p class="eyebrow">Latest</p>
+          <h2>最新消息</h2>
+          <p>把最新官方進度置頂，讓訪客不用翻完整時間軸也能知道目前卡在哪一步。</p>
+        </div>
+        <div class="latest-grid" id="latestGrid"></div>
       </section>
 
       <section class="section" id="timeline">
@@ -155,6 +175,15 @@
           <p>本頁資料以 2026-05-14 查詢到的官方公開頁面為準。若官方頁面更新，只需同步更新 `app.js` 的資料陣列。</p>
         </div>
         <div class="sources" id="sourceList"></div>
+      </section>
+
+      <section class="section source-section" id="updates">
+        <div class="section-heading">
+          <p class="eyebrow">Changelog</p>
+          <h2>網站變更紀錄</h2>
+          <p>記錄每次更新日期、資料來源與調整重點，方便後續查核網站資訊如何演進。</p>
+        </div>
+        <div class="changelog" id="changelogList"></div>
       </section>
     </main>
 

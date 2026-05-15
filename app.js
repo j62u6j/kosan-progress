@@ -53,6 +53,30 @@ const riskSignals = [
   }
 ];
 
+const latestUpdates = [
+  {
+    date: "115.04.28",
+    title: "議會質詢確認目前進度",
+    text: "縣府回應第 6 次專案小組已審竣，目前補充資料後將送內政部都委會大會；若大會通過，科三案將可向前邁進。",
+    source: "新竹縣政府新聞",
+    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
+  },
+  {
+    date: "115.04.17",
+    title: "施政報告說明送大會前程序",
+    text: "縣長於施政報告表示，第 6 次專案小組取得共識，縣府修正後送內政部確認，再提請都委會大會審議。",
+    source: "新竹縣政府新聞",
+    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=282429&sms=8603"
+  },
+  {
+    date: "115.04.08",
+    title: "縣府澄清科三案無須聽證",
+    text: "縣府說明科三案與台知案流程不同；科三修正後將送內政部大會，目前依既定法定程序推進。",
+    source: "新竹縣政府新聞",
+    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=2715&s=281799"
+  }
+];
+
 const forecasts = [
   {
     step: "01",
@@ -317,6 +341,24 @@ const sources = [
   }
 ];
 
+const changelog = [
+  {
+    date: "2026.05.15",
+    title: "新增公開發布版輔助功能",
+    text: "加入最新消息置頂區、網站變更紀錄與社群分享 meta，讓公開分享時更清楚。"
+  },
+  {
+    date: "2026.05.15",
+    title: "更新至 115 年 4 月官方進度",
+    text: "補入第 6 次專案小組、4 月 3 日重大突破、4 月 8 日澄清、4 月 17 日施政報告、4 月 28 日議會質詢。"
+  },
+  {
+    date: "2026.05.14",
+    title: "建立第一版進度追蹤網站",
+    text: "完成進度階段、風險燈號、下一步預測、政府公開文件搜尋與土地使用視覺化。"
+  }
+];
+
 function riskLabel(level) {
   const labels = {
     green: "綠燈",
@@ -324,6 +366,18 @@ function riskLabel(level) {
     red: "紅燈"
   };
   return labels[level] || "未標示";
+}
+
+function renderLatestUpdates() {
+  const target = document.querySelector("#latestGrid");
+  target.innerHTML = latestUpdates.map((update, index) => `
+    <article class="latest-card ${index === 0 ? "primary-latest" : ""}">
+      <div class="latest-date">${update.date}</div>
+      <h3>${update.title}</h3>
+      <p>${update.text}</p>
+      <a href="${update.url}" target="_blank" rel="noopener">${update.source}</a>
+    </article>
+  `).join("");
 }
 
 function renderRisks() {
@@ -435,9 +489,23 @@ function renderSources() {
   `).join("");
 }
 
+function renderChangelog() {
+  const target = document.querySelector("#changelogList");
+  target.innerHTML = changelog.map((item) => `
+    <article class="change-item">
+      <time>${item.date}</time>
+      <div>
+        <h3>${item.title}</h3>
+        <p>${item.text}</p>
+      </div>
+    </article>
+  `).join("");
+}
+
 document.querySelector("#recordFilter").addEventListener("change", renderRecords);
 document.querySelector("#recordSearch").addEventListener("input", renderRecords);
 
+renderLatestUpdates();
 renderRisks();
 renderStages();
 renderTimeline();
@@ -445,3 +513,4 @@ renderForecasts();
 renderLandUse();
 renderRecords();
 renderSources();
+renderChangelog();
