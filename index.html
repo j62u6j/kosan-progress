@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>新竹科學園區三期（科三）進度追蹤</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="topbar" aria-label="頁面導覽">
+        <a class="brand" href="#overview" aria-label="回到總覽">
+          <span class="brand-mark" aria-hidden="true">科三</span>
+          <span>進度追蹤</span>
+        </a>
+        <div class="nav-links">
+          <a href="#timeline">進度</a>
+          <a href="#forecast">下一步</a>
+          <a href="#records">文件搜尋</a>
+          <a href="#landuse">土地配置</a>
+          <a href="#sources">來源</a>
+        </div>
+      </nav>
+
+      <section id="overview" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">新竹縣政府官方公開資料彙整</p>
+          <h1>新竹科學園區第三期開發計畫</h1>
+          <p class="lead">
+            目前已到內政部都委會第 6 次專案小組審查後修正階段。官方最新說法為：第 6 次專案小組已審竣，縣府補充與修正資料後將送內政部都委會大會審議。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#timeline">看整體進度</a>
+            <a class="secondary-action" href="#records">搜尋公開文件</a>
+          </div>
+        </div>
+
+        <aside class="status-panel" aria-label="目前狀態摘要">
+          <p class="panel-label">目前狀態</p>
+          <strong>修正後送大會</strong>
+          <span>第 6 次專案小組已審竣，補充資料後送內政部都委會大會</span>
+          <div class="progress-ring" aria-label="概略進度 78%">
+            <svg viewBox="0 0 120 120" role="img">
+              <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+              <circle class="ring-fg" cx="60" cy="60" r="50"></circle>
+            </svg>
+            <div>
+              <b>78%</b>
+              <small>都市計畫審議流程概略</small>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="summary-grid" aria-label="計畫摘要">
+        <article>
+          <span class="metric">453.94 ha</span>
+          <p>主要計畫面積</p>
+        </article>
+        <article>
+          <span class="metric">304.38 ha</span>
+          <p>預計區段徵收開發範圍</p>
+        </article>
+        <article>
+          <span class="metric">18,500 人</span>
+          <p>計畫人口</p>
+        </article>
+        <article>
+          <span class="metric">民國 125 年</span>
+          <p>計畫年期</p>
+        </article>
+      </section>
+
+      <section class="section compact-section" id="risk">
+        <div class="section-heading">
+          <p class="eyebrow">Risk Signals</p>
+          <h2>風險燈號</h2>
+          <p>用綠、黃、紅快速標示每個面向的狀態。黃燈不代表失敗，而是表示需要持續追蹤官方下一次動作。</p>
+        </div>
+        <div class="risk-grid" id="riskGrid"></div>
+      </section>
+
+      <section class="section" id="timeline">
+        <div class="section-heading">
+          <p class="eyebrow">Progress</p>
+          <h2>現在走到哪裡</h2>
+          <p>依官方「執行進度」整理，將已完成、目前卡點與下一步分開顯示。</p>
+        </div>
+        <div class="stage-track" id="stageTrack"></div>
+        <div class="timeline" id="timelineList"></div>
+      </section>
+
+      <section class="section" id="forecast">
+        <div class="section-heading">
+          <p class="eyebrow">Next Steps</p>
+          <h2>接下來可能怎麼走</h2>
+          <p>以下是依都市計畫審議流程與官方目前狀態整理的下一步預測，屬於流程推估，正式結果仍以政府公告為準。</p>
+        </div>
+        <div class="forecast-grid" id="forecastGrid"></div>
+      </section>
+
+      <section class="section split" id="landuse">
+        <div class="section-heading">
+          <p class="eyebrow">Land Use</p>
+          <h2>規劃內容一眼看</h2>
+          <p>官方草案以生活、產業、服務機能並進為方向，產業專用區原則朝低污染、資訊研發及農業生技等類型。</p>
+        </div>
+        <div class="chart-area">
+          <div class="bar-chart" id="landUseChart" aria-label="土地使用規劃長條圖"></div>
+          <div class="notes">
+            <h3>關鍵提醒</h3>
+            <ul>
+              <li>計畫區位於竹東鎮頭重里、二重里、三重里及柯湖里部分地區。</li>
+              <li>因位於自來水水質水量保護區，產業類別須符合自來水法限制。</li>
+              <li>官方 FAQ 說明污水規劃將設污水處理空間，處理後以專管排至湳雅取水口下游。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="records">
+        <div class="section-heading records-heading">
+          <div>
+            <p class="eyebrow">Document Search</p>
+            <h2>政府公開文件搜尋</h2>
+            <p>用關鍵字或分類快速找到公開展覽、會議節點、審議資料入口與 FAQ。</p>
+          </div>
+          <div class="record-tools" aria-label="文件搜尋工具">
+            <label class="search-box">
+              <span>搜尋</span>
+              <input id="recordSearch" type="search" placeholder="輸入：內政部、問卷、污水、產業...">
+            </label>
+            <label class="filter">
+              <span>分類</span>
+              <select id="recordFilter">
+                <option value="all">全部</option>
+                <option value="county">新竹縣政府</option>
+                <option value="central">內政部都委會</option>
+                <option value="public">公開展覽/民眾參與</option>
+                <option value="source">資料入口/FAQ</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="record-count" id="recordCount"></div>
+        <div class="records-list" id="recordsList"></div>
+      </section>
+
+      <section class="section source-section" id="sources">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>官方資料來源</h2>
+          <p>本頁資料以 2026-05-14 查詢到的官方公開頁面為準。若官方頁面更新，只需同步更新 `app.js` 的資料陣列。</p>
+        </div>
+        <div class="sources" id="sourceList"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>非官方網站。用途為整理公開資料、視覺化追蹤進度，所有正式判讀仍以政府公告為準。</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
