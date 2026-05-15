@@ -104,6 +104,33 @@ const forecasts = [
   }
 ];
 
+const watchlist = [
+  {
+    title: "內政部都委會大會審議",
+    date: "待官方公告",
+    status: "最重要",
+    text: "第 6 次專案小組後，下一個重大節點是內政部都委會大會是否排入議程並審議。"
+  },
+  {
+    title: "縣府補充資料完成",
+    date: "待官方公告",
+    status: "需追蹤",
+    text: "官方目前說法是補充資料後送大會，因此補件完成或送件消息值得優先追蹤。"
+  },
+  {
+    title: "第 6 次專案小組會議紀錄公開",
+    date: "待官方公告",
+    status: "需追蹤",
+    text: "若會議紀錄公開，應更新委員意見、修正要求與送大會條件。"
+  },
+  {
+    title: "大會通過後續公告",
+    date: "大會後",
+    status: "後續",
+    text: "若大會通過，才會進一步追蹤都市計畫核定、區段徵收、工程與公共設施程序。"
+  }
+];
+
 const timeline = [
   {
     date: "107.05.22",
@@ -195,6 +222,7 @@ const records = [
     text: "官方執行進度列為本案正式公開程序。",
     category: "public",
     type: "公開展覽",
+    credibility: "official-record",
     risk: "green",
     url: "https://www.hsinchu.gov.tw/cp.aspx?n=982&s=263"
   },
@@ -204,6 +232,7 @@ const records = [
     text: "公開展覽期間辦理，供民眾了解草案內容。",
     category: "public",
     type: "說明會",
+    credibility: "official-record",
     risk: "green",
     url: "https://www.hsinchu.gov.tw/cp.aspx?n=982&s=263"
   },
@@ -213,6 +242,7 @@ const records = [
     text: "審議修正後通過，並提報內政部都市計畫委員會審議。",
     category: "county",
     type: "縣都委會",
+    credibility: "official-record",
     risk: "green",
     url: "https://www.hsinchu.gov.tw/cp.aspx?n=982&s=263"
   },
@@ -222,6 +252,7 @@ const records = [
     text: "專案小組建議縣府送土徵小組評估公益性及必要性，再續都市計畫審議。",
     category: "central",
     type: "中央審議",
+    credibility: "official-news",
     risk: "green",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=259307"
   },
@@ -231,6 +262,7 @@ const records = [
     text: "內政部土徵小組同意完成審查，之後回歸內政部都市計畫委員會續審。",
     category: "central",
     type: "土徵審查",
+    credibility: "official-news",
     risk: "green",
     url: "https://information.hsinchu.gov.tw/News_Content.aspx?n=2203&s=274416"
   },
@@ -240,6 +272,7 @@ const records = [
     text: "國土管理署召開會議，討論前次意見處理、公益性必要性評估、民眾意見等議題。",
     category: "central",
     type: "中央審議",
+    credibility: "official-news",
     risk: "yellow",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=2715&s=281799"
   },
@@ -249,6 +282,7 @@ const records = [
     text: "縣府新聞指出委員取得共識，同意本案修正後提送內政部都委會大會審議。",
     category: "county",
     type: "縣府新聞",
+    credibility: "official-news",
     risk: "yellow",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=281599&sms=8603"
   },
@@ -258,6 +292,7 @@ const records = [
     text: "縣府澄清：科三案無須召開聽證會，修正後將送內政部大會；台知案才有聽證程序。",
     category: "source",
     type: "訊息澄清",
+    credibility: "official-news",
     risk: "yellow",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=2715&s=281799"
   },
@@ -267,6 +302,7 @@ const records = [
     text: "縣長表示第 6 次專案小組取得共識，縣府修正後送內政部確認，再提請都委會大會審議。",
     category: "county",
     type: "施政報告",
+    credibility: "official-news",
     risk: "yellow",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=282429&sms=8603"
   },
@@ -276,6 +312,7 @@ const records = [
     text: "縣府回應：第 6 次專案小組已經審竣，目前補充資料後將送大會，如大會通過將可向前邁進。",
     category: "county",
     type: "議會質詢",
+    credibility: "official-news",
     risk: "yellow",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
   },
@@ -285,6 +322,7 @@ const records = [
     text: "新竹縣政府提供細部計畫公展資料、提報內政部都委會審議資料與現行分區查詢連結。",
     category: "source",
     type: "資料入口",
+    credibility: "official-record",
     risk: "yellow",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=987&s=226446&sms=9345"
   },
@@ -294,6 +332,7 @@ const records = [
     text: "官方說明產業專用區原則朝低污染、資訊研發及農業生技等相關產業。",
     category: "source",
     type: "FAQ",
+    credibility: "official-faq",
     risk: "yellow",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=141&s=226393&sms=8759"
   },
@@ -303,8 +342,32 @@ const records = [
     text: "官方說明污水排放將經污水處理廠處理後，以專管拉至湳雅取水口下游排放。",
     category: "source",
     type: "FAQ",
+    credibility: "official-faq",
     risk: "yellow",
     url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=141&s=226392&sms=8759"
+  }
+];
+
+const faqs = [
+  {
+    question: "科三目前到底走到哪一步？",
+    answer: "依最新官方新聞，科三已完成內政部都委會第 6 次專案小組審查討論，縣府補充與修正資料後，將送內政部都委會大會審議。"
+  },
+  {
+    question: "現在是不是已經確定開發了？",
+    answer: "還不是。現在是中央都市計畫審議接近大會階段，仍需內政部都委會大會審議通過，後續才會進入更具體的核定、用地與開發程序。"
+  },
+  {
+    question: "科三跟台知園區有什麼不同？",
+    answer: "縣府 115 年 4 月 8 日澄清，科三案與台知案流程不同；科三案目前依既定法定程序推進，修正後送內政部大會，無須召開聽證會。"
+  },
+  {
+    question: "下一個最重要的官方訊號是什麼？",
+    answer: "最重要的是內政部都委會大會是否排入議程，以及縣府補充資料是否已送內政部確認。這兩個訊號會決定案件是否進一步往核定方向走。"
+  },
+  {
+    question: "網站上的風險燈號代表什麼？",
+    answer: "綠燈代表程序已完成或資料明確；黃燈代表仍需追蹤官方下一步；紅燈則代表時程或條件仍高度不明確。目前後續開發期程仍以黃燈追蹤。"
   }
 ];
 
@@ -366,6 +429,17 @@ function riskLabel(level) {
     red: "紅燈"
   };
   return labels[level] || "未標示";
+}
+
+function credibilityLabel(level) {
+  const labels = {
+    "official-news": "官方新聞",
+    "official-record": "官方紀錄",
+    "official-faq": "官方 FAQ",
+    "process-inference": "流程推估",
+    "pending-confirmation": "待確認"
+  };
+  return labels[level] || "資料來源";
 }
 
 function renderLatestUpdates() {
@@ -430,6 +504,18 @@ function renderForecasts() {
   `).join("");
 }
 
+function renderWatchlist() {
+  const target = document.querySelector("#watchlistGrid");
+  target.innerHTML = watchlist.map((item) => `
+    <article class="watch-card">
+      <span class="watch-status">${item.status}</span>
+      <h3>${item.title}</h3>
+      <time>${item.date}</time>
+      <p>${item.text}</p>
+    </article>
+  `).join("");
+}
+
 function renderLandUse() {
   const target = document.querySelector("#landUseChart");
   target.innerHTML = landUse.map((item) => {
@@ -464,7 +550,7 @@ function renderRecords() {
     <article class="record">
       <div class="record-top">
         <time>${record.date}</time>
-        <span class="tag ${record.risk}">${riskLabel(record.risk)} / ${record.type}</span>
+        <span class="tag ${record.risk}">${riskLabel(record.risk)} / ${credibilityLabel(record.credibility)} / ${record.type}</span>
       </div>
       <h3>${record.title}</h3>
       <p>${record.text}</p>
@@ -476,6 +562,16 @@ function renderRecords() {
       <p>可改用較短關鍵字，例如「內政部」、「第6次」、「大會」、「聽證」、「公益性」。</p>
     </article>
   `;
+}
+
+function renderFaqs() {
+  const target = document.querySelector("#faqList");
+  target.innerHTML = faqs.map((item) => `
+    <details class="faq-item">
+      <summary>${item.question}</summary>
+      <p>${item.answer}</p>
+    </details>
+  `).join("");
 }
 
 function renderSources() {
@@ -510,7 +606,9 @@ renderRisks();
 renderStages();
 renderTimeline();
 renderForecasts();
+renderWatchlist();
 renderLandUse();
 renderRecords();
+renderFaqs();
 renderSources();
 renderChangelog();

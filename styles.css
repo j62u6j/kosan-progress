@@ -393,7 +393,8 @@ main {
 
 .risk-grid,
 .forecast-grid,
-.latest-grid {
+.latest-grid,
+.watchlist {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
@@ -401,7 +402,8 @@ main {
 
 .risk-card,
 .forecast-card,
-.latest-card {
+.latest-card,
+.watch-card {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -552,6 +554,40 @@ main {
 
 .primary-latest a {
   color: #c9f0d7;
+}
+
+.watch-card {
+  min-height: 190px;
+}
+
+.watch-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  margin-bottom: 14px;
+  padding: 0 9px;
+  color: #15312d;
+  background: #d9f0e1;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.watch-card h3 {
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.watch-card time {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--gold);
+  font-weight: 900;
+}
+
+.watch-card p {
+  margin: 0;
+  color: var(--muted);
 }
 
 .split .chart-area {
@@ -713,7 +749,7 @@ main {
 .tag {
   color: var(--muted);
   font-size: 13px;
-  white-space: nowrap;
+  text-align: right;
 }
 
 .tag.green {
@@ -730,6 +766,37 @@ main {
 
 .empty-record {
   grid-column: 1 / -1;
+}
+
+.faq-list {
+  display: grid;
+  gap: 12px;
+  max-width: 900px;
+}
+
+.faq-item {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 18px 20px;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.faq-item summary::marker {
+  color: var(--green);
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 20px 20px;
+  color: var(--muted);
 }
 
 .source-section {
@@ -814,6 +881,7 @@ footer p {
   .risk-grid,
   .forecast-grid,
   .latest-grid,
+  .watchlist,
   .records-list,
   .sources {
     grid-template-columns: repeat(2, 1fr);
@@ -874,9 +942,18 @@ footer p {
   .risk-grid,
   .forecast-grid,
   .latest-grid,
+  .watchlist,
   .records-list,
   .sources {
     grid-template-columns: 1fr;
+  }
+
+  .record-top {
+    flex-direction: column;
+  }
+
+  .tag {
+    text-align: left;
   }
 
   .change-item {
