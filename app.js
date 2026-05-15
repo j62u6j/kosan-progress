@@ -306,11 +306,11 @@ const timeline = [
 ];
 
 const landUse = [
-  { label: "公共設施", value: 148.8, max: 453.94, unit: "ha" },
-  { label: "產業專用", value: 92, max: 453.94, unit: "ha" },
-  { label: "住宅區", value: 57, max: 453.94, unit: "ha" },
-  { label: "農業區", value: 42.7, max: 453.94, unit: "ha" },
-  { label: "商業區", value: 3.7, max: 453.94, unit: "ha" }
+  { label: "公共設施", value: 148.8, max: 453.94 },
+  { label: "產業專用", value: 92, max: 453.94 },
+  { label: "住宅區", value: 57, max: 453.94 },
+  { label: "農業區", value: 42.7, max: 453.94 },
+  { label: "商業區", value: 3.7, max: 453.94 }
 ];
 
 const records = [
@@ -660,11 +660,12 @@ function renderLandUse() {
   const target = document.querySelector("#landUseChart");
   target.innerHTML = landUse.map((item) => {
     const width = Math.round((item.value / item.max) * 100);
+    const km2 = (item.value / 100).toFixed(2);
     return `
       <div class="bar-row">
         <span class="bar-label">${item.label}</span>
         <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="width:${width}%"></span></span>
-        <span class="bar-value">${item.value} ${item.unit}</span>
+        <span class="bar-value">${item.value} 公頃<br><small>約 ${km2} 平方公里</small></span>
       </div>
     `;
   }).join("");

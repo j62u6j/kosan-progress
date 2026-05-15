@@ -839,7 +839,7 @@ main {
 
 .bar-row {
   display: grid;
-  grid-template-columns: 128px 1fr 80px;
+  grid-template-columns: 128px 1fr 124px;
   gap: 14px;
   align-items: center;
   margin-bottom: 18px;
@@ -886,6 +886,13 @@ main {
   color: var(--muted);
   font-weight: 800;
   text-align: right;
+  line-height: 1.35;
+}
+
+.bar-value small {
+  color: #87919b;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .notes h3 {
