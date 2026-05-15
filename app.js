@@ -1,620 +1,13 @@
-const stages = [
-  {
-    title: "公開展覽與民眾參與",
-    text: "完成公開展覽、說明會、陳情意見聽取與土地所有權人問卷調查。",
-    state: "done"
-  },
-  {
-    title: "縣都委會通過",
-    text: "108 年 5 月 29 日新竹縣都委會第 303 次會議修正後通過。",
-    state: "done"
-  },
-  {
-    title: "土徵公益性審查",
-    text: "內政部土徵小組於 114 年同意完成公益性及必要性評估審查。",
-    state: "done"
-  },
-  {
-    title: "中央專案小組審竣",
-    text: "115 年 3 月 31 日第 6 次專案小組會議取得共識，修正後送大會。",
-    state: "current"
-  },
-  {
-    title: "都委會大會與開發",
-    text: "補充資料並經內政部確認後，提請都委會大會審議；通過後才會展開後續程序。",
-    state: "pending"
+let stages, statusSummary, dataStatus, riskSignals, briefCards, topicGuides, latestUpdates, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog;
+
+async function loadSiteData() {
+  const response = await fetch('data.json');
+  if (!response.ok) {
+    throw new Error(`Unable to load data.json: ${response.status}`);
   }
-];
-
-const statusSummary = [
-  {
-    label: "目前階段",
-    value: "修正後送大會",
-    text: "第 6 次專案小組已審竣"
-  },
-  {
-    label: "下一關",
-    value: "內政部都委會大會",
-    text: "待補充資料與排入議程"
-  },
-  {
-    label: "最新官方更新",
-    value: "115.04.28",
-    text: "議會質詢更新目前進度"
-  },
-  {
-    label: "最該追蹤",
-    value: "大會排程",
-    text: "是否進入內政部都委會大會"
-  }
-];
-
-const dataStatus = {
-  pageUpdated: "2026.05.16",
-  latestOfficialDate: "115.04.28",
-  latestOfficialTitle: "議會質詢更新科三目前進度",
-  monitorText: "每日自動檢查官方來源"
-};
-
-const riskSignals = [
-  {
-    level: "green",
-    title: "縣級程序",
-    status: "已完成",
-    text: "縣都委會已於 108 年第 303 次會議審議修正後通過。"
-  },
-  {
-    level: "green",
-    title: "公益性與必要性",
-    status: "已完成審查",
-    text: "土徵公益性及必要性評估已完成審查，案件回到都市計畫審議程序。"
-  },
-  {
-    level: "yellow",
-    title: "中央都委會大會",
-    status: "待送大會",
-    text: "第 6 次專案小組已審竣，縣府補充資料後送內政部都委會大會。"
-  },
-  {
-    level: "yellow",
-    title: "後續開發期程",
-    status: "尚未明確",
-    text: "大會尚未通過，區段徵收、工程、招商與開發時程仍需後續公告。"
-  }
-];
-
-const briefCards = [
-  {
-    title: "科三在哪裡？",
-    text: "位於新竹縣竹東鎮頭重里、二重里、三重里及柯湖里部分地區，屬竹科周邊科技廊帶討論的一環。"
-  },
-  {
-    title: "現在到哪一步？",
-    text: "目前已完成內政部都委會第 6 次專案小組討論，縣府補充與修正資料後，將送內政部都委會大會。"
-  },
-  {
-    title: "下一步是什麼？",
-    text: "最重要的是內政部都委會大會是否排入議程，以及大會審議結果是否通過或要求再補正。"
-  },
-  {
-    title: "面積有多大？",
-    text: "主要計畫面積約 453.94 公頃，約 4.54 平方公里；預計區段徵收開發範圍約 304.38 公頃。"
-  },
-  {
-    title: "主要關切是什麼？",
-    text: "常見關切包含水源保護、污水處理、產業類型、交通負荷、土地徵收、公共設施與居民意見處理。"
-  },
-  {
-    title: "看哪裡最準？",
-    text: "以新竹縣政府、內政部都委會、國土管理署與新竹縣都市計畫網等官方公開資料為準。"
-  }
-];
-
-const topicGuides = [
-  {
-    title: "都市計畫程序",
-    status: "中央大會前",
-    text: "已完成縣都委會、土徵公益性審查及第 6 次專案小組。下一步是送內政部都委會大會。",
-    watch: "追蹤大會議程、會議紀錄與審議結論。"
-  },
-  {
-    title: "土地徵收與開發",
-    status: "尚未進入實質開發",
-    text: "官方資料顯示預計區段徵收範圍約 304.38 公頃，但仍待中央都市計畫審議結果。",
-    watch: "追蹤區段徵收公告、用地取得、補償與安置資訊。"
-  },
-  {
-    title: "水源與污水",
-    status: "高度關注",
-    text: "因涉及自來水水質水量保護區，產業類型與污水處理方式是重要審議與民眾關切項目。",
-    watch: "追蹤污水處理、專管排放、環境保護與水源安全說明。"
-  },
-  {
-    title: "產業專用區",
-    status: "需看產業限制",
-    text: "官方 FAQ 說明原則朝低污染、資訊研發及農業生技等方向，仍須符合相關法規限制。",
-    watch: "追蹤產業類別、招商方向、污染管制與用地配置。"
-  },
-  {
-    title: "交通與公共設施",
-    status: "待後續細化",
-    text: "若進入後續開發程序，道路系統、聯外交通、學校、社福與公共設施配置會更重要。",
-    watch: "追蹤道路、公共設施用地、交通影響與地方生活機能。"
-  },
-  {
-    title: "民眾參與與資訊公開",
-    status: "需持續更新",
-    text: "早期已辦理公開展覽、說明會與問卷；後續仍需看官方是否公布新會議紀錄與意見處理。",
-    watch: "追蹤公開資料、會議紀錄、說明會與地方回應。"
-  }
-];
-
-const latestUpdates = [
-  {
-    date: "115.04.28",
-    title: "議會質詢確認目前進度",
-    text: "縣府回應第 6 次專案小組已審竣，目前補充資料後將送內政部都委會大會；若大會通過，科三案將可向前邁進。",
-    source: "新竹縣政府新聞",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
-  },
-  {
-    date: "115.04.17",
-    title: "施政報告說明送大會前程序",
-    text: "縣長於施政報告表示，第 6 次專案小組取得共識，縣府修正後送內政部確認，再提請都委會大會審議。",
-    source: "新竹縣政府新聞",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=282429&sms=8603"
-  },
-  {
-    date: "115.04.08",
-    title: "縣府澄清科三案無須聽證",
-    text: "縣府說明科三案與台知案流程不同；科三修正後將送內政部大會，目前依既定法定程序推進。",
-    source: "新竹縣政府新聞",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=2715&s=281799"
-  }
-];
-
-const forecasts = [
-  {
-    step: "01",
-    title: "縣府補充與修正資料",
-    status: "目前正在這裡",
-    text: "依第 6 次專案小組會議建議，補充規劃配置、道路、社福用地與民眾意見處理等內容。"
-  },
-  {
-    step: "02",
-    title: "內政部相關單位確認",
-    status: "送大會前門檻",
-    text: "官方 4 月 3 日與 4 月 8 日資料皆指出，修正後需先提送內政部相關單位確認。"
-  },
-  {
-    step: "03",
-    title: "內政部都委會大會審議",
-    status: "下一個重大節點",
-    text: "若確認完成，提請內政部都委會大會審議；大會通過後案件才會正式向後續開發推進。"
-  },
-  {
-    step: "04",
-    title: "用地、工程與公共設施程序",
-    status: "待大會後",
-    text: "需續追區段徵收、道路系統、污水處理、公共設施、產業用地配置與細部計畫溝通。"
-  }
-];
-
-const processSteps = [
-  {
-    title: "公開展覽與說明會",
-    date: "107.05-06",
-    status: "done",
-    text: "完成都市計畫公開展覽 30 天及公開展覽說明會。"
-  },
-  {
-    title: "民眾意見與問卷",
-    date: "107.07-11",
-    status: "done",
-    text: "聽取陳情意見，辦理土地所有權人問卷調查。"
-  },
-  {
-    title: "新竹縣都委會",
-    date: "108.05",
-    status: "done",
-    text: "第 303 次會議審議修正後通過，提報內政部。"
-  },
-  {
-    title: "土徵公益性審查",
-    date: "114.08",
-    status: "done",
-    text: "內政部土徵小組同意完成公益性及必要性評估審查。"
-  },
-  {
-    title: "內政部專案小組",
-    date: "115.03",
-    status: "current",
-    text: "第 6 次專案小組已審竣，補充資料後送大會。"
-  },
-  {
-    title: "內政部都委會大會",
-    date: "待公告",
-    status: "next",
-    text: "下一個重大節點，待排入大會審議。"
-  },
-  {
-    title: "核定公告與開發程序",
-    date: "後續",
-    status: "pending",
-    text: "大會通過後才會進入核定、用地、工程與開發程序。"
-  }
-];
-
-const mapAreas = [
-  {
-    id: "core",
-    label: "科三計畫區",
-    x: 54,
-    y: 48,
-    type: "核心範圍",
-    title: "竹東頭重、二重、三重、柯湖一帶",
-    text: "官方計畫區位於竹東鎮頭重里、二重里、三重里及柯湖里部分地區。此處以示意方式標示核心追蹤範圍。",
-    note: "正式範圍以都市計畫圖資與政府公告為準。"
-  },
-  {
-    id: "zhudong",
-    label: "竹東鎮",
-    x: 30,
-    y: 62,
-    type: "行政區",
-    title: "竹東鎮",
-    text: "科三計畫位於竹東鎮部分里別，後續交通、住宅、公共設施與生活機能都與竹東發展高度相關。",
-    note: "可搭配官方都市計畫圖與分區查詢確認細節。"
-  },
-  {
-    id: "hsinchu",
-    label: "新竹市/竹科",
-    x: 18,
-    y: 30,
-    type: "周邊節點",
-    title: "新竹市與既有竹科生活圈",
-    text: "科三定位與新竹科技廊帶、既有產業聚落及交通需求相關，是後續產業配置討論的背景之一。",
-    note: "本圖只標示相對關係，不代表交通距離比例。"
-  },
-  {
-    id: "water",
-    label: "水源保護議題",
-    x: 72,
-    y: 36,
-    type: "環境議題",
-    title: "自來水水質水量保護區限制",
-    text: "官方 FAQ 說明產業類型與污水處理需符合相關限制，這是科三後續審議和民眾關注的重要面向。",
-    note: "應持續追蹤污水處理、排放專管與產業類型限制。"
-  },
-  {
-    id: "road",
-    label: "交通串聯",
-    x: 67,
-    y: 70,
-    type: "交通議題",
-    title: "道路與交通串聯",
-    text: "後續若進入開發程序，道路系統、聯外交通與公共設施配置會成為重要追蹤項目。",
-    note: "目前仍待中央大會審議後，才會有更明確的後續推進資訊。"
-  }
-];
-
-const watchlist = [
-  {
-    title: "內政部都委會大會審議",
-    date: "待官方公告",
-    status: "最重要",
-    text: "第 6 次專案小組後，下一個重大節點是內政部都委會大會是否排入議程並審議。"
-  },
-  {
-    title: "縣府補充資料完成",
-    date: "待官方公告",
-    status: "需追蹤",
-    text: "官方目前說法是補充資料後送大會，因此補件完成或送件消息值得優先追蹤。"
-  },
-  {
-    title: "第 6 次專案小組會議紀錄公開",
-    date: "待官方公告",
-    status: "需追蹤",
-    text: "若會議紀錄公開，應更新委員意見、修正要求與送大會條件。"
-  },
-  {
-    title: "大會通過後續公告",
-    date: "大會後",
-    status: "後續",
-    text: "若大會通過，才會進一步追蹤都市計畫核定、區段徵收、工程與公共設施程序。"
-  }
-];
-
-const timeline = [
-  {
-    date: "107.05.22",
-    title: "都市計畫公開展覽開始",
-    text: "公開展覽 30 天，至 107 年 6 月 21 日止。",
-    badge: "完成"
-  },
-  {
-    date: "107.06.02",
-    title: "公開展覽說明會",
-    text: "於竹東二重國小舉辦公開展覽說明會。",
-    badge: "完成"
-  },
-  {
-    date: "107.07-09",
-    title: "縣都委會專案小組第 1 至 4 次",
-    text: "聽取民眾陳情，建議辦理土地所有權人問卷調查並調整規劃。",
-    badge: "完成"
-  },
-  {
-    date: "107.10.15",
-    title: "土地所有權人問卷調查",
-    text: "調查區段徵收開發意願與務農者農業用地需求，11 月 9 日截止回收。",
-    badge: "完成"
-  },
-  {
-    date: "108.05.29",
-    title: "新竹縣都市計畫委員會第 303 次會議",
-    text: "縣級審議修正後通過，後續於 108 年 6 月 27 日提報內政部審議。",
-    badge: "完成"
-  },
-  {
-    date: "113.04.19",
-    title: "內政部都委會第 5 次專案小組",
-    text: "議題聚焦後，建議縣府送土徵公益性及必要性評估，再循都市計畫審議程序辦理。",
-    badge: "完成"
-  },
-  {
-    date: "114.08.06",
-    title: "內政部土徵小組同意完成審查",
-    text: "公益性及必要性評估報告完成審查，案件後續回歸內政部都市計畫委員會續審。",
-    badge: "完成"
-  },
-  {
-    date: "115.03.31",
-    title: "內政部都委會第 6 次專案小組",
-    text: "出席委員就意見處理、公益性必要性評估、民眾意見等議題討論，取得共識。",
-    badge: "完成"
-  },
-  {
-    date: "115.04.03",
-    title: "縣府發布重大突破新聞",
-    text: "委員同意本案修正後提送內政部都委會大會審議。",
-    badge: "最新"
-  },
-  {
-    date: "115.04.08",
-    title: "縣府澄清科三無須召開聽證會",
-    text: "科三案與台知案流程不同；科三修正後將送內政部大會，目前依既定法定程序推進。",
-    badge: "最新"
-  },
-  {
-    date: "115.04.17",
-    title: "縣長施政報告更新科三進度",
-    text: "施政報告指出第 6 次專案小組取得共識，修正確認後送內政部都委會大會。",
-    badge: "最新"
-  },
-  {
-    date: "115.04.28",
-    title: "議會質詢再確認目前狀態",
-    text: "縣府表示第 6 次專案小組已經審竣，目前補充資料後將送大會；如大會通過將可向前邁進。",
-    badge: "目前",
-    pending: true
-  }
-];
-
-const landUse = [
-  { label: "公共設施", value: 148.8, max: 453.94 },
-  { label: "產業專用", value: 92, max: 453.94 },
-  { label: "住宅區", value: 57, max: 453.94 },
-  { label: "農業區", value: 42.7, max: 453.94 },
-  { label: "商業區", value: 3.7, max: 453.94 }
-];
-
-const records = [
-  {
-    date: "107.05.22-06.21",
-    title: "都市計畫公開展覽 30 天",
-    text: "官方執行進度列為本案正式公開程序。",
-    category: "public",
-    type: "公開展覽",
-    credibility: "official-record",
-    risk: "green",
-    url: "https://www.hsinchu.gov.tw/cp.aspx?n=982&s=263"
-  },
-  {
-    date: "107.06.02",
-    title: "竹東二重國小公開展覽說明會",
-    text: "公開展覽期間辦理，供民眾了解草案內容。",
-    category: "public",
-    type: "說明會",
-    credibility: "official-record",
-    risk: "green",
-    url: "https://www.hsinchu.gov.tw/cp.aspx?n=982&s=263"
-  },
-  {
-    date: "108.05.29",
-    title: "新竹縣都委會第 303 次會議",
-    text: "審議修正後通過，並提報內政部都市計畫委員會審議。",
-    category: "county",
-    type: "縣都委會",
-    credibility: "official-record",
-    risk: "green",
-    url: "https://www.hsinchu.gov.tw/cp.aspx?n=982&s=263"
-  },
-  {
-    date: "113.04.19",
-    title: "內政部都委會第 5 次專案小組",
-    text: "專案小組建議縣府送土徵小組評估公益性及必要性，再續都市計畫審議。",
-    category: "central",
-    type: "中央審議",
-    credibility: "official-news",
-    risk: "green",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=259307"
-  },
-  {
-    date: "114.08.06",
-    title: "土徵公益性及必要性評估完成審查",
-    text: "內政部土徵小組同意完成審查，之後回歸內政部都市計畫委員會續審。",
-    category: "central",
-    type: "土徵審查",
-    credibility: "official-news",
-    risk: "green",
-    url: "https://information.hsinchu.gov.tw/News_Content.aspx?n=2203&s=274416"
-  },
-  {
-    date: "115.03.31",
-    title: "科三案內政部都委會第 6 次專案小組",
-    text: "國土管理署召開會議，討論前次意見處理、公益性必要性評估、民眾意見等議題。",
-    category: "central",
-    type: "中央審議",
-    credibility: "official-news",
-    risk: "yellow",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=2715&s=281799"
-  },
-  {
-    date: "115.04.03",
-    title: "竹科三期重大突破",
-    text: "縣府新聞指出委員取得共識，同意本案修正後提送內政部都委會大會審議。",
-    category: "county",
-    type: "縣府新聞",
-    credibility: "official-news",
-    risk: "yellow",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=281599&sms=8603"
-  },
-  {
-    date: "115.04.08",
-    title: "科三修正後將送內政部大會",
-    text: "縣府澄清：科三案無須召開聽證會，修正後將送內政部大會；台知案才有聽證程序。",
-    category: "source",
-    type: "訊息澄清",
-    credibility: "official-news",
-    risk: "yellow",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=2715&s=281799"
-  },
-  {
-    date: "115.04.17",
-    title: "施政報告提及科三最新進度",
-    text: "縣長表示第 6 次專案小組取得共識，縣府修正後送內政部確認，再提請都委會大會審議。",
-    category: "county",
-    type: "施政報告",
-    credibility: "official-news",
-    risk: "yellow",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=282429&sms=8603"
-  },
-  {
-    date: "115.04.28",
-    title: "議員總質詢更新科三進度",
-    text: "縣府回應：第 6 次專案小組已經審竣，目前補充資料後將送大會，如大會通過將可向前邁進。",
-    category: "county",
-    type: "議會質詢",
-    credibility: "official-news",
-    risk: "yellow",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
-  },
-  {
-    date: "109.04.02",
-    title: "都市計畫規劃內容及會議資料入口",
-    text: "新竹縣政府提供細部計畫公展資料、提報內政部都委會審議資料與現行分區查詢連結。",
-    category: "source",
-    type: "資料入口",
-    credibility: "official-record",
-    risk: "yellow",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=987&s=226446&sms=9345"
-  },
-  {
-    date: "109.04.09",
-    title: "產業專用區 FAQ",
-    text: "官方說明產業專用區原則朝低污染、資訊研發及農業生技等相關產業。",
-    category: "source",
-    type: "FAQ",
-    credibility: "official-faq",
-    risk: "yellow",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=141&s=226393&sms=8759"
-  },
-  {
-    date: "109.04.09",
-    title: "污水處理 FAQ",
-    text: "官方說明污水排放將經污水處理廠處理後，以專管拉至湳雅取水口下游排放。",
-    category: "source",
-    type: "FAQ",
-    credibility: "official-faq",
-    risk: "yellow",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=141&s=226392&sms=8759"
-  }
-];
-
-const faqs = [
-  {
-    question: "科三目前到底走到哪一步？",
-    answer: "依最新官方新聞，科三已完成內政部都委會第 6 次專案小組審查討論，縣府補充與修正資料後，將送內政部都委會大會審議。"
-  },
-  {
-    question: "現在是不是已經確定開發了？",
-    answer: "還不是。現在是中央都市計畫審議接近大會階段，仍需內政部都委會大會審議通過，後續才會進入更具體的核定、用地與開發程序。"
-  },
-  {
-    question: "科三跟台知園區有什麼不同？",
-    answer: "縣府 115 年 4 月 8 日澄清，科三案與台知案流程不同；科三案目前依既定法定程序推進，修正後送內政部大會，無須召開聽證會。"
-  },
-  {
-    question: "下一個最重要的官方訊號是什麼？",
-    answer: "最重要的是內政部都委會大會是否排入議程，以及縣府補充資料是否已送內政部確認。這兩個訊號會決定案件是否進一步往核定方向走。"
-  },
-  {
-    question: "網站上的風險燈號代表什麼？",
-    answer: "綠燈代表程序已完成或資料明確；黃燈代表仍需追蹤官方下一步；紅燈則代表時程或條件仍高度不明確。目前後續開發期程仍以黃燈追蹤。"
-  }
-];
-
-const sources = [
-  {
-    title: "新竹縣政府：科三計畫",
-    text: "計畫簡介、執行進度、會議紀錄入口與常見問答。",
-    url: "https://www.hsinchu.gov.tw/cp.aspx?n=982&s=263"
-  },
-  {
-    title: "115-04-03 竹科三期重大突破",
-    text: "第 6 次專案小組取得共識，修正後提送大會審議。",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=281599&sms=8603"
-  },
-  {
-    title: "115-04-08 科三修正後將送大會",
-    text: "縣府澄清科三無須聽證，與台知園區流程不同。",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=2715&s=281799"
-  },
-  {
-    title: "115-04-17 施政報告",
-    text: "縣長於議會施政報告說明第 6 次專案小組後續程序。",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=282429&sms=8603"
-  },
-  {
-    title: "115-04-28 議會質詢",
-    text: "縣府回應目前補充資料後將送大會。",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
-  },
-  {
-    title: "都市計畫規劃內容及會議資料",
-    text: "細部計畫公展資料、提報內政部都委會審議資料等入口。",
-    url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=987&s=226446&sms=9345"
-  }
-];
-
-const changelog = [
-  {
-    date: "2026.05.15",
-    title: "新增公開發布版輔助功能",
-    text: "加入最新消息置頂區、網站變更紀錄與社群分享 meta，讓公開分享時更清楚。"
-  },
-  {
-    date: "2026.05.15",
-    title: "更新至 115 年 4 月官方進度",
-    text: "補入第 6 次專案小組、4 月 3 日重大突破、4 月 8 日澄清、4 月 17 日施政報告、4 月 28 日議會質詢。"
-  },
-  {
-    date: "2026.05.14",
-    title: "建立第一版進度追蹤網站",
-    text: "完成進度階段、風險燈號、下一步預測、政府公開文件搜尋與土地使用視覺化。"
-  }
-];
+  const data = await response.json();
+  ({ stages, statusSummary, dataStatus, riskSignals, briefCards, topicGuides, latestUpdates, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog } = data);
+}
 
 function riskLabel(level) {
   const labels = {
@@ -861,10 +254,10 @@ function renderRecords() {
   const filtered = getFilteredRecords();
   count.textContent = `共找到 ${filtered.length} 筆官方公開資料`;
   target.innerHTML = filtered.length ? filtered.map((record) => `
-    <article class="record">
+    <article class="record ${record.recent ? "recent-record" : ""}">
       <div class="record-top">
         <time>${record.date}</time>
-        <span class="tag ${record.risk}">${riskLabel(record.risk)} / ${credibilityLabel(record.credibility)} / ${record.type}</span>
+        <span class="tag ${record.risk}">${record.recent ? "最近更新 / " : ""}${riskLabel(record.risk)} / ${credibilityLabel(record.credibility)} / ${record.type}</span>
       </div>
       <h3>${record.title}</h3>
       <p>${record.text}</p>
@@ -912,28 +305,49 @@ function renderChangelog() {
   `).join("");
 }
 
-document.querySelector("#recordFilter").addEventListener("change", renderRecords);
-document.querySelector("#recordSearch").addEventListener("input", renderRecords);
-document.querySelector("#yearFilter").addEventListener("change", renderRecords);
-document.querySelector("#typeFilter").addEventListener("change", renderRecords);
-document.querySelector("#signalFilter").addEventListener("change", renderRecords);
-document.querySelector("#latestOnly").addEventListener("change", renderRecords);
+function bindUi() {
+  document.querySelector("#recordFilter").addEventListener("change", renderRecords);
+  document.querySelector("#recordSearch").addEventListener("input", renderRecords);
+  document.querySelector("#yearFilter").addEventListener("change", renderRecords);
+  document.querySelector("#typeFilter").addEventListener("change", renderRecords);
+  document.querySelector("#signalFilter").addEventListener("change", renderRecords);
+  document.querySelector("#latestOnly").addEventListener("change", renderRecords);
 
-renderUpdateBanner();
-renderStatusSummary();
-renderLatestUpdates();
-renderBriefCards();
-renderTopicGuides();
-renderRisks();
-renderStages();
-renderTimeline();
-renderForecasts();
-renderProcessFlow();
-renderProjectMap();
-renderWatchlist();
-renderLandUse();
-setupRecordFilters();
-renderRecords();
-renderFaqs();
-renderSources();
-renderChangelog();
+  document.querySelector("#backToTop").addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+function renderAll() {
+  renderUpdateBanner();
+  renderStatusSummary();
+  renderLatestUpdates();
+  renderBriefCards();
+  renderTopicGuides();
+  renderRisks();
+  renderStages();
+  renderTimeline();
+  renderForecasts();
+  renderProcessFlow();
+  renderProjectMap();
+  renderWatchlist();
+  renderLandUse();
+  setupRecordFilters();
+  renderRecords();
+  renderFaqs();
+  renderSources();
+  renderChangelog();
+}
+
+async function init() {
+  try {
+    await loadSiteData();
+    renderAll();
+    bindUi();
+  } catch (error) {
+    console.error(error);
+    document.body.insertAdjacentHTML("afterbegin", '<div class="data-error">資料載入失敗，請稍後重新整理。</div>');
+  }
+}
+
+init();

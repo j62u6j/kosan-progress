@@ -22,4 +22,6 @@ http://127.0.0.1:49156/index.html
 
 ## 資料更新
 
-主要資料集中在 `app.js`。若官方公告或會議紀錄更新，請同步更新 `stages`、`riskSignals`、`forecasts`、`timeline`、`records` 與 `sources`。
+主要資料集中在 `data.json`。若官方公告或會議紀錄更新，請同步更新對應資料陣列，例如 `timeline`、`records`、`latestUpdates`、`watchlist`、`sources` 與 `changelog`。
+
+`app.js` 只負責載入 `data.json` 與渲染頁面，日常更新資料時通常不需要修改程式邏輯。
