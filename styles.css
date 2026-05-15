@@ -33,7 +33,7 @@ a {
 }
 
 .site-header {
-  min-height: 92vh;
+  min-height: auto;
   background:
     linear-gradient(90deg, rgba(21, 49, 45, 0.96), rgba(21, 49, 45, 0.72)),
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 92px),
@@ -50,7 +50,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 22px 0;
+  padding: 18px 0;
 }
 
 .brand,
@@ -95,12 +95,12 @@ a {
 .hero {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  min-height: calc(92vh - 86px);
+  min-height: 560px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 370px;
   gap: 48px;
   align-items: center;
-  padding: 48px 0 72px;
+  padding: 58px 0 96px;
 }
 
 .eyebrow {
@@ -125,16 +125,16 @@ p {
 
 h1 {
   max-width: 780px;
-  margin-bottom: 20px;
-  font-size: clamp(42px, 7vw, 88px);
-  line-height: 1.05;
+  margin-bottom: 18px;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 1.08;
   letter-spacing: 0;
 }
 
 .lead {
   max-width: 760px;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .hero-actions {
@@ -167,7 +167,7 @@ h1 {
 }
 
 .status-panel {
-  padding: 26px;
+  padding: 24px;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
@@ -182,7 +182,7 @@ h1 {
 
 .status-panel strong {
   display: block;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1.2;
 }
 
@@ -194,15 +194,15 @@ h1 {
 
 .progress-ring {
   display: grid;
-  grid-template-columns: 132px 1fr;
-  gap: 18px;
+  grid-template-columns: 112px 1fr;
+  gap: 16px;
   align-items: center;
-  margin-top: 26px;
+  margin-top: 22px;
 }
 
 .progress-ring svg {
-  width: 132px;
-  height: 132px;
+  width: 112px;
+  height: 112px;
   transform: rotate(-90deg);
 }
 
@@ -225,7 +225,7 @@ h1 {
 
 .progress-ring b {
   display: block;
-  font-size: 40px;
+  font-size: 36px;
   line-height: 1;
 }
 
@@ -244,7 +244,7 @@ main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  margin-top: -42px;
+  margin-top: -44px;
   background: var(--line);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -253,15 +253,15 @@ main {
 }
 
 .summary-grid article {
-  min-height: 130px;
-  padding: 24px;
+  min-height: 112px;
+  padding: 20px 24px;
   background: var(--paper);
 }
 
 .metric {
   display: block;
   color: var(--green-dark);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 900;
 }
 
@@ -1110,6 +1110,11 @@ footer p {
     max-width: 470px;
   }
 
+  .hero {
+    min-height: auto;
+    padding: 42px 0 78px;
+  }
+
   .summary-grid,
   .stage-track,
   .risk-grid,
@@ -1160,11 +1165,11 @@ footer p {
 
   .hero {
     width: min(100% - 28px, 1180px);
-    padding-top: 38px;
+    padding: 34px 0 70px;
   }
 
   h1 {
-    font-size: 42px;
+    font-size: 38px;
   }
 
   .lead {
@@ -1204,12 +1209,12 @@ footer p {
   }
 
   .progress-ring {
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 96px 1fr;
   }
 
   .progress-ring svg {
-    width: 110px;
-    height: 110px;
+    width: 96px;
+    height: 96px;
   }
 
   .bar-row {
