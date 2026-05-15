@@ -49,6 +49,13 @@ const statusSummary = [
   }
 ];
 
+const dataStatus = {
+  pageUpdated: "2026.05.16",
+  latestOfficialDate: "115.04.28",
+  latestOfficialTitle: "議會質詢更新科三目前進度",
+  monitorText: "每日自動檢查官方來源"
+};
+
 const riskSignals = [
   {
     level: "green",
@@ -640,6 +647,17 @@ function renderStatusSummary() {
   `).join("");
 }
 
+function renderUpdateBanner() {
+  const target = document.querySelector("#updateBanner");
+  target.innerHTML = `
+    <div>
+      <span>資料最後更新：${dataStatus.pageUpdated}</span>
+      <span>最新官方資料：${dataStatus.latestOfficialDate} ${dataStatus.latestOfficialTitle}</span>
+      <span>監測狀態：${dataStatus.monitorText}</span>
+    </div>
+  `;
+}
+
 function renderLatestUpdates() {
   const target = document.querySelector("#latestGrid");
   target.innerHTML = latestUpdates.map((update, index) => `
@@ -794,14 +812,46 @@ function renderLandUse() {
   }).join("");
 }
 
+function getRecordYear(record) {
+  const match = record.date.match(/^(\d{3})/);
+  return match ? match[1] : "其他";
+}
+
+function setupRecordFilters() {
+  const yearFilter = document.querySelector("#yearFilter");
+  const typeFilter = document.querySelector("#typeFilter");
+  const years = [...new Set(records.map(getRecordYear))].sort((a, b) => b.localeCompare(a, "zh-Hant"));
+  const types = [...new Set(records.map((record) => record.type))].sort((a, b) => a.localeCompare(b, "zh-Hant"));
+
+  yearFilter.innerHTML = `
+    <option value="all">全部</option>
+    ${years.map((year) => `<option value="${year}">${year} 年</option>`).join("")}
+  `;
+
+  typeFilter.innerHTML = `
+    <option value="all">全部</option>
+    ${types.map((type) => `<option value="${type}">${type}</option>`).join("")}
+  `;
+}
+
 function getFilteredRecords() {
   const category = document.querySelector("#recordFilter").value;
+  const year = document.querySelector("#yearFilter").value;
+  const type = document.querySelector("#typeFilter").value;
+  const signal = document.querySelector("#signalFilter").value;
+  const latestOnly = document.querySelector("#latestOnly").checked;
   const keyword = document.querySelector("#recordSearch").value.trim().toLowerCase();
+  const latestYear = Math.max(...records.map((record) => Number(getRecordYear(record))).filter(Boolean)).toString();
+
   return records.filter((record) => {
     const categoryMatched = category === "all" || record.category === category;
+    const yearMatched = year === "all" || getRecordYear(record) === year;
+    const typeMatched = type === "all" || record.type === type;
+    const signalMatched = signal === "all" || record.risk === signal;
+    const latestMatched = !latestOnly || getRecordYear(record) === latestYear;
     const haystack = `${record.date} ${record.title} ${record.text} ${record.type}`.toLowerCase();
     const keywordMatched = !keyword || haystack.includes(keyword);
-    return categoryMatched && keywordMatched;
+    return categoryMatched && yearMatched && typeMatched && signalMatched && latestMatched && keywordMatched;
   });
 }
 
@@ -864,7 +914,12 @@ function renderChangelog() {
 
 document.querySelector("#recordFilter").addEventListener("change", renderRecords);
 document.querySelector("#recordSearch").addEventListener("input", renderRecords);
+document.querySelector("#yearFilter").addEventListener("change", renderRecords);
+document.querySelector("#typeFilter").addEventListener("change", renderRecords);
+document.querySelector("#signalFilter").addEventListener("change", renderRecords);
+document.querySelector("#latestOnly").addEventListener("change", renderRecords);
 
+renderUpdateBanner();
 renderStatusSummary();
 renderLatestUpdates();
 renderBriefCards();
@@ -877,6 +932,7 @@ renderProcessFlow();
 renderProjectMap();
 renderWatchlist();
 renderLandUse();
+setupRecordFilters();
 renderRecords();
 renderFaqs();
 renderSources();
