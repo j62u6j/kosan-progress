@@ -270,7 +270,7 @@ function renderRecords() {
       </div>
       <h3>${record.title}</h3>
       <p>${record.text}</p>
-      <a href="${record.url}" target="_blank" rel="noopener">開啟官方資料</a>
+      <a class="official-link" href="${record.url}" target="_blank" rel="noopener">開啟官方資料</a>
     </article>
   `).join("") : `
     <article class="record empty-record">
@@ -296,7 +296,7 @@ function renderSources() {
     <article class="source-card">
       <h3>${source.title}</h3>
       <p>${source.text}</p>
-      <a href="${source.url}" target="_blank" rel="noopener">查看來源</a>
+      <a class="official-link" href="${source.url}" target="_blank" rel="noopener">查看來源</a>
     </article>
   `).join("");
 }
@@ -336,10 +336,44 @@ function bindUi() {
   document.querySelector("#typeFilter").addEventListener("change", renderRecords);
   document.querySelector("#signalFilter").addEventListener("change", renderRecords);
   document.querySelector("#latestOnly").addEventListener("change", renderRecords);
+  document.querySelector("#clearFilters").addEventListener("click", () => {
+    document.querySelector("#recordSearch").value = "";
+    document.querySelector("#recordFilter").value = "all";
+    document.querySelector("#yearFilter").value = "all";
+    document.querySelector("#typeFilter").value = "all";
+    document.querySelector("#signalFilter").value = "all";
+    document.querySelector("#latestOnly").checked = true;
+    renderRecords();
+  });
 
   document.querySelector("#backToTop").addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+
+  setupActiveNavigation();
+}
+
+function setupActiveNavigation() {
+  const navLinks = [...document.querySelectorAll(".nav-links a, .floating-nav a")];
+  const sections = navLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    const activeId = `#${visible.target.id}`;
+    navLinks.forEach((link) => {
+      link.classList.toggle("active", link.getAttribute("href") === activeId);
+    });
+  }, {
+    rootMargin: "-25% 0px -60% 0px",
+    threshold: [0.08, 0.2, 0.4]
+  });
+
+  sections.forEach((section) => observer.observe(section));
 }
 
 function renderAll() {
@@ -370,7 +404,12 @@ async function init() {
     bindUi();
   } catch (error) {
     console.error(error);
-    document.body.insertAdjacentHTML("afterbegin", '<div class="data-error">資料載入失敗，請稍後重新整理。</div>');
+    document.body.insertAdjacentHTML("afterbegin", `
+      <div class="data-error">
+        <strong>資料載入失敗</strong>
+        <span>請確認 GitHub Pages 已上傳 <code>data.json</code>，並重新整理頁面。若剛更新網站，請等待 Pages 部署完成。</span>
+      </div>
+    `);
   }
 }
 

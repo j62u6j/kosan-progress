@@ -117,6 +117,11 @@
           <h2>風險燈號</h2>
           <p>用綠、黃、紅快速標示每個面向的狀態。黃燈不代表失敗，而是表示需要持續追蹤官方下一次動作。</p>
         </div>
+        <div class="signal-legend" aria-label="燈號說明">
+          <span><i class="legend-dot green"></i>綠燈：已完成或資料明確</span>
+          <span><i class="legend-dot yellow"></i>黃燈：需持續追蹤</span>
+          <span><i class="legend-dot red"></i>紅燈：高度不確定或重大風險</span>
+        </div>
         <div class="risk-grid" id="riskGrid"></div>
       </section>
 
@@ -165,7 +170,13 @@
         </div>
         <div class="map-layout">
           <div class="schematic-map" id="projectMap" aria-label="科三區位示意地圖"></div>
-          <aside class="map-detail" id="mapDetail" aria-live="polite"></aside>
+          <aside class="map-detail" aria-live="polite">
+            <div id="mapDetail"></div>
+            <div class="map-official-links">
+              <a href="https://urbanplan.hsinchu.gov.tw/" target="_blank" rel="noopener">查看新竹縣都市計畫網</a>
+              <a href="https://www.hsinchu.gov.tw/News_Content.aspx?n=987&s=226446&sms=9345" target="_blank" rel="noopener">查看官方規劃資料入口</a>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -258,6 +269,7 @@
               <input id="latestOnly" type="checkbox" checked>
               <span>只看最新年度</span>
             </label>
+            <button class="clear-filters" id="clearFilters" type="button">清除篩選</button>
           </div>
         </div>
         <div class="record-count" id="recordCount"></div>
