@@ -201,12 +201,12 @@ a {
 .hero {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  min-height: 320px;
+  min-height: 260px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 370px;
-  gap: 34px;
+  gap: 28px;
   align-items: center;
-  padding: 18px 0 42px;
+  padding: 12px 0 30px;
 }
 
 .eyebrow {
@@ -231,8 +231,8 @@ p {
 
 h1 {
   max-width: 780px;
-  margin-bottom: 10px;
-  font-size: clamp(30px, 3.7vw, 48px);
+  margin-bottom: 8px;
+  font-size: clamp(30px, 3.3vw, 44px);
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -246,9 +246,9 @@ h1 {
 .hero-conclusion {
   max-width: 760px;
   display: grid;
-  gap: 6px;
-  margin-top: 14px;
-  padding: 12px 14px;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 10px 12px;
   color: #fff;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -270,7 +270,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .primary-action,
@@ -296,7 +296,7 @@ h1 {
 }
 
 .status-panel {
-  padding: 20px;
+  padding: 16px;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
@@ -304,14 +304,14 @@ h1 {
 }
 
 .panel-label {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: var(--muted);
   font-size: 14px;
 }
 
 .status-panel strong {
   display: block;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.2;
 }
 
@@ -323,23 +323,23 @@ h1 {
 
 .progress-ring {
   display: grid;
-  grid-template-columns: 82px 1fr;
-  gap: 12px;
+  grid-template-columns: 68px 1fr;
+  gap: 10px;
   align-items: center;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .progress-ring svg {
-  width: 82px;
-  height: 82px;
+  width: 68px;
+  height: 68px;
   transform: rotate(-90deg);
 }
 
 .official-basis {
   display: grid;
-  gap: 6px;
-  margin-top: 14px;
-  padding-top: 14px;
+  gap: 4px;
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid var(--line);
 }
 
@@ -356,7 +356,7 @@ h1 {
 .official-basis p {
   margin-bottom: 2px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .ring-bg,
@@ -378,13 +378,13 @@ h1 {
 
 .progress-ring b {
   display: block;
-  font-size: 28px;
+  font-size: 25px;
   line-height: 1;
 }
 
 .progress-ring small {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
   color: var(--muted);
 }
 
@@ -397,7 +397,7 @@ main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  margin-top: -18px;
+  margin-top: -12px;
   background: var(--line);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -406,21 +406,22 @@ main {
 }
 
 .summary-grid article {
-  min-height: 96px;
-  padding: 16px 20px;
+  min-height: 78px;
+  padding: 12px 16px;
   background: var(--paper);
 }
 
 .metric {
   display: block;
   color: var(--green-dark);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 900;
 }
 
 .summary-grid p {
-  margin: 8px 0 0;
+  margin: 4px 0 0;
   color: var(--muted);
+  font-size: 14px;
 }
 
 .status-strip {
@@ -975,7 +976,7 @@ main {
 }
 
 .latest-card {
-  min-height: 190px;
+  min-height: 158px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -989,11 +990,11 @@ main {
 
 .latest-date {
   width: fit-content;
-  min-height: 28px;
+  min-height: 24px;
   display: inline-flex;
   align-items: center;
-  margin-bottom: 16px;
-  padding: 0 10px;
+  margin-bottom: 10px;
+  padding: 0 9px;
   color: var(--green-dark);
   background: #edf4ee;
   border-radius: 999px;
@@ -1007,13 +1008,15 @@ main {
 }
 
 .latest-card h3 {
-  margin-bottom: 10px;
-  font-size: 22px;
+  margin-bottom: 6px;
+  font-size: 18px;
   line-height: 1.25;
 }
 
 .latest-card p {
+  margin-bottom: 8px;
   color: var(--muted);
+  font-size: 14px;
 }
 
 .primary-latest p {
@@ -1021,7 +1024,7 @@ main {
 }
 
 .latest-card a {
-  margin-top: 10px;
+  margin-top: 4px;
   color: var(--green-dark);
   font-weight: 900;
 }
@@ -1033,11 +1036,11 @@ main {
 .pending-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 10px;
 }
 
 .pending-card {
-  padding: 18px;
+  padding: 14px;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1046,8 +1049,8 @@ main {
 .pending-card span {
   display: inline-flex;
   align-items: center;
-  min-height: 26px;
-  margin-bottom: 12px;
+  min-height: 23px;
+  margin-bottom: 8px;
   padding: 0 9px;
   color: var(--gold);
   background: rgba(185, 135, 43, 0.1);
@@ -1062,19 +1065,30 @@ main {
 }
 
 .pending-card h3 {
-  margin-bottom: 8px;
-  font-size: 18px;
+  margin-bottom: 6px;
+  font-size: 16px;
 }
 
 .pending-card p {
+  margin-bottom: 8px;
   color: var(--muted);
+  font-size: 14px;
 }
 
 .pending-card strong {
   display: block;
   color: var(--green-dark);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.55;
+}
+
+#pending {
+  padding-top: 22px;
+}
+
+#pending .section-heading,
+#latest .section-heading {
+  margin-bottom: 18px;
 }
 
 .watch-card {
@@ -1621,7 +1635,7 @@ footer p {
 
   .hero {
     min-height: auto;
-    padding: 18px 0 38px;
+    padding: 14px 0 30px;
   }
 
   .summary-grid,
@@ -1700,7 +1714,7 @@ footer p {
 
   .hero {
     width: min(100% - 28px, 1180px);
-    padding: 18px 0 36px;
+    padding: 12px 0 26px;
   }
 
   h1 {
@@ -1709,6 +1723,25 @@ footer p {
 
   .lead {
     font-size: 16px;
+  }
+
+  .hero-conclusion {
+    padding: 9px 10px;
+  }
+
+  .hero-actions {
+    gap: 8px;
+  }
+
+  .primary-action,
+  .secondary-action {
+    flex: 1 1 140px;
+    min-height: 38px;
+    padding: 0 12px;
+  }
+
+  .status-panel {
+    padding: 14px;
   }
 
   main {
@@ -1773,27 +1806,42 @@ footer p {
   }
 
   .floating-nav {
-    right: 10px;
-    bottom: 10px;
-    grid-template-columns: repeat(3, auto);
+    right: 50%;
+    bottom: 8px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(360px, calc(100% - 20px));
     max-width: calc(100% - 20px);
+    transform: translateX(50%);
+  }
+
+  .floating-nav a[href="#brief"],
+  .floating-nav a[href="#process"] {
+    display: none;
   }
 
   .floating-nav a,
   .floating-nav button {
-    min-width: auto;
-    min-height: 32px;
+    min-width: 0;
+    min-height: 34px;
     padding: 0 8px;
     font-size: 12px;
   }
 
   .progress-ring {
-    grid-template-columns: 82px 1fr;
+    grid-template-columns: 58px 1fr;
   }
 
   .progress-ring svg {
-    width: 82px;
-    height: 82px;
+    width: 58px;
+    height: 58px;
+  }
+
+  .official-basis p {
+    display: none;
+  }
+
+  footer {
+    padding-bottom: 64px;
   }
 
   .bar-row {
