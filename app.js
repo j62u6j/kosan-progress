@@ -1,4 +1,4 @@
-let stages, statusSummary, dataStatus, riskSignals, briefCards, topicGuides, latestUpdates, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog;
+let stages, statusSummary, dataStatus, siteSummary, officialBasis, riskSignals, briefCards, topicGuides, latestUpdates, pendingItems, quickKeywords, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog;
 
 async function loadSiteData() {
   const response = await fetch('data.json');
@@ -6,7 +6,7 @@ async function loadSiteData() {
     throw new Error(`Unable to load data.json: ${response.status}`);
   }
   const data = await response.json();
-  ({ stages, statusSummary, dataStatus, riskSignals, briefCards, topicGuides, latestUpdates, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog } = data);
+  ({ stages, statusSummary, dataStatus, siteSummary, officialBasis, riskSignals, briefCards, topicGuides, latestUpdates, pendingItems, quickKeywords, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog } = data);
 }
 
 function riskLabel(level) {
@@ -51,6 +51,24 @@ function renderUpdateBanner() {
   `;
 }
 
+function renderHeroConclusion() {
+  const target = document.querySelector("#heroConclusion");
+  target.innerHTML = `
+    <span>${siteSummary.label}</span>
+    <strong>${siteSummary.text}</strong>
+  `;
+}
+
+function renderOfficialBasis() {
+  const target = document.querySelector("#officialBasis");
+  target.innerHTML = `
+    <span>${officialBasis.label}</span>
+    <strong>${officialBasis.date} ${officialBasis.title}</strong>
+    <p>${officialBasis.text}</p>
+    <a class="official-link" href="${officialBasis.url}" target="_blank" rel="noopener">${officialBasis.source}</a>
+  `;
+}
+
 function renderLatestUpdates() {
   const target = document.querySelector("#latestGrid");
   target.innerHTML = latestUpdates.map((update, index) => `
@@ -59,6 +77,18 @@ function renderLatestUpdates() {
       <h3>${update.title}</h3>
       <p>${update.text}</p>
       <a href="${update.url}" target="_blank" rel="noopener">${update.source}</a>
+    </article>
+  `).join("");
+}
+
+function renderPendingItems() {
+  const target = document.querySelector("#pendingGrid");
+  target.innerHTML = pendingItems.map((item) => `
+    <article class="pending-card ${item.level}">
+      <span>${item.status}</span>
+      <h3>${item.title}</h3>
+      <p>${item.text}</p>
+      <strong>${item.next}</strong>
     </article>
   `).join("");
 }
@@ -236,6 +266,35 @@ function setupRecordFilters() {
   `;
 }
 
+function renderQuickKeywords() {
+  const target = document.querySelector("#quickKeywords");
+  target.innerHTML = `
+    <span>快速關鍵字</span>
+    <div>
+      ${quickKeywords.map((keyword) => `<button type="button" data-keyword="${keyword}">${keyword}</button>`).join("")}
+    </div>
+  `;
+
+  target.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelector("#recordSearch").value = button.dataset.keyword;
+      document.querySelector("#latestOnly").checked = false;
+      target.querySelectorAll("button").forEach((item) => {
+        item.classList.toggle("active", item === button);
+      });
+      renderRecords();
+      document.querySelector("#recordsList").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
+function syncQuickKeywordState() {
+  const keyword = document.querySelector("#recordSearch")?.value.trim();
+  document.querySelectorAll("#quickKeywords button").forEach((button) => {
+    button.classList.toggle("active", button.dataset.keyword === keyword);
+  });
+}
+
 function getFilteredRecords() {
   const category = document.querySelector("#recordFilter").value;
   const year = document.querySelector("#yearFilter").value;
@@ -261,6 +320,7 @@ function renderRecords() {
   const target = document.querySelector("#recordsList");
   const count = document.querySelector("#recordCount");
   const filtered = getFilteredRecords();
+  syncQuickKeywordState();
   count.textContent = `共找到 ${filtered.length} 筆官方公開資料`;
   target.innerHTML = filtered.length ? filtered.map((record) => `
     <article class="record ${record.recent ? "recent-record" : ""}">
@@ -331,7 +391,12 @@ function bindUi() {
   });
 
   document.querySelector("#recordFilter").addEventListener("change", renderRecords);
-  document.querySelector("#recordSearch").addEventListener("input", renderRecords);
+  document.querySelector("#recordSearch").addEventListener("input", () => {
+    document.querySelectorAll("#quickKeywords button").forEach((button) => {
+      button.classList.remove("active");
+    });
+    renderRecords();
+  });
   document.querySelector("#yearFilter").addEventListener("change", renderRecords);
   document.querySelector("#typeFilter").addEventListener("change", renderRecords);
   document.querySelector("#signalFilter").addEventListener("change", renderRecords);
@@ -343,6 +408,9 @@ function bindUi() {
     document.querySelector("#typeFilter").value = "all";
     document.querySelector("#signalFilter").value = "all";
     document.querySelector("#latestOnly").checked = true;
+    document.querySelectorAll("#quickKeywords button").forEach((button) => {
+      button.classList.remove("active");
+    });
     renderRecords();
   });
 
@@ -378,8 +446,11 @@ function setupActiveNavigation() {
 
 function renderAll() {
   renderUpdateBanner();
+  renderHeroConclusion();
+  renderOfficialBasis();
   renderStatusSummary();
   renderLatestUpdates();
+  renderPendingItems();
   renderBriefCards();
   renderTopicGuides();
   renderRisks();
@@ -391,6 +462,7 @@ function renderAll() {
   renderWatchlist();
   renderLandUse();
   setupRecordFilters();
+  renderQuickKeywords();
   renderRecords();
   renderFaqs();
   renderSources();

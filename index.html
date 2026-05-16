@@ -63,6 +63,7 @@
           <p class="lead">
             目前狀態：第 6 次專案小組已審竣，補充資料後送內政部都委會大會。
           </p>
+          <div class="hero-conclusion" id="heroConclusion" aria-label="一句話結論"></div>
           <div class="hero-actions">
             <a class="primary-action" href="#timeline">看整體進度</a>
             <a class="secondary-action" href="#records">搜尋公開文件</a>
@@ -83,6 +84,7 @@
               <small>都市計畫審議流程概略</small>
             </div>
           </div>
+          <div class="official-basis" id="officialBasis"></div>
         </aside>
       </section>
     </header>
@@ -132,6 +134,15 @@
           <p>把最新官方進度置頂，讓訪客不用翻完整時間軸也能知道目前卡在哪一步。</p>
         </div>
         <div class="latest-grid" id="latestGrid"></div>
+      </section>
+
+      <section class="section compact-section" id="pending">
+        <div class="section-heading">
+          <p class="eyebrow">Pending Check</p>
+          <h2>待確認資訊</h2>
+          <p>把已被提及、但仍需等待正式文件或公告補強的資訊獨立列出，避免和已確認進度混在一起。</p>
+        </div>
+        <div class="pending-grid" id="pendingGrid"></div>
       </section>
 
       <section class="section" id="timeline">
@@ -272,6 +283,7 @@
               </label>
               <button class="clear-filters" id="clearFilters" type="button">清除篩選</button>
             </div>
+            <div class="quick-keywords" id="quickKeywords" aria-label="快速關鍵字"></div>
           </div>
         </div>
         <div class="record-count" id="recordCount"></div>
@@ -291,7 +303,7 @@
         <div class="section-heading">
           <p class="eyebrow">Sources</p>
           <h2>官方資料來源</h2>
-          <p>本頁資料以 2026-05-14 查詢到的官方公開頁面為準。若官方頁面更新，只需同步更新 `app.js` 的資料陣列。</p>
+          <p>本頁資料以官方公開頁面為準。若官方頁面更新，只需同步更新 `data.json` 的資料內容。</p>
         </div>
         <div class="sources" id="sourceList"></div>
       </section>
