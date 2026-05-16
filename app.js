@@ -210,6 +210,15 @@ function getRecordYear(record) {
   return match ? match[1] : "其他";
 }
 
+function recordSortValue(record) {
+  const match = record.date.match(/^(\d{3})\.(\d{2})\.(\d{2})/);
+  if (!match) {
+    const year = Number(getRecordYear(record)) || 0;
+    return year * 10000;
+  }
+  return Number(match[1]) * 10000 + Number(match[2]) * 100 + Number(match[3]);
+}
+
 function setupRecordFilters() {
   const yearFilter = document.querySelector("#yearFilter");
   const typeFilter = document.querySelector("#typeFilter");
@@ -245,7 +254,7 @@ function getFilteredRecords() {
     const haystack = `${record.date} ${record.title} ${record.text} ${record.type}`.toLowerCase();
     const keywordMatched = !keyword || haystack.includes(keyword);
     return categoryMatched && yearMatched && typeMatched && signalMatched && latestMatched && keywordMatched;
-  });
+  }).sort((a, b) => recordSortValue(b) - recordSortValue(a));
 }
 
 function renderRecords() {
@@ -306,6 +315,21 @@ function renderChangelog() {
 }
 
 function bindUi() {
+  const menuToggle = document.querySelector("#menuToggle");
+  const siteNav = document.querySelector("#siteNav");
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = siteNav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  siteNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      siteNav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
   document.querySelector("#recordFilter").addEventListener("change", renderRecords);
   document.querySelector("#recordSearch").addEventListener("input", renderRecords);
   document.querySelector("#yearFilter").addEventListener("change", renderRecords);

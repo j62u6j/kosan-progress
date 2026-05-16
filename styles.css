@@ -146,6 +146,19 @@ a {
   text-decoration: none;
 }
 
+.menu-toggle {
+  display: none;
+  min-height: 38px;
+  padding: 0 12px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 7px;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
 .brand-mark {
   display: grid;
   place-items: center;
@@ -176,12 +189,12 @@ a {
 .hero {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  min-height: 390px;
+  min-height: 320px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 370px;
   gap: 34px;
   align-items: center;
-  padding: 24px 0 54px;
+  padding: 18px 0 42px;
 }
 
 .eyebrow {
@@ -206,8 +219,8 @@ p {
 
 h1 {
   max-width: 780px;
-  margin-bottom: 12px;
-  font-size: clamp(32px, 4.25vw, 56px);
+  margin-bottom: 10px;
+  font-size: clamp(30px, 3.7vw, 48px);
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -215,14 +228,14 @@ h1 {
 .lead {
   max-width: 760px;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 18px;
 }
 
 .primary-action,
@@ -263,7 +276,7 @@ h1 {
 
 .status-panel strong {
   display: block;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.2;
 }
 
@@ -325,7 +338,7 @@ main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  margin-top: -24px;
+  margin-top: -18px;
   background: var(--line);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1375,7 +1388,7 @@ footer p {
 
   .hero {
     min-height: auto;
-    padding: 20px 0 46px;
+    padding: 18px 0 38px;
   }
 
   .summary-grid,
@@ -1417,26 +1430,43 @@ footer p {
   }
 
   .topbar {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
   }
 
   .nav-links {
     width: 100%;
-    flex-wrap: wrap;
+    display: none;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 0 0;
+  }
+
+  .nav-links.open {
+    display: flex;
   }
 
   .nav-links a {
-    padding-left: 0;
+    padding: 9px 10px;
+    background: rgba(255, 255, 255, 0.08);
   }
 
   .hero {
     width: min(100% - 28px, 1180px);
-    padding: 20px 0 44px;
+    padding: 18px 0 36px;
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .lead {
