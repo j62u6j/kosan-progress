@@ -1,0 +1,43 @@
+name: Kosan official source monitor
+
+on:
+  schedule:
+    - cron: "45 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run official source monitor
+        run: node scripts/kosan-monitor.js
+
+      - name: Upload monitor report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kosan-monitor-report
+          path: monitor-report.md
+
+      - name: Commit monitor report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add monitor-report.md
+          if git diff --cached --quiet; then
+            echo "No monitor report changes to commit."
+          else
+            git commit -m "chore: update Kosan monitor report"
+            git push
+          fi
