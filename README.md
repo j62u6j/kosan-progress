@@ -25,3 +25,14 @@ http://127.0.0.1:49156/index.html
 主要資料集中在 `data.json`。若官方公告或會議紀錄更新，請同步更新對應資料陣列，例如 `timeline`、`records`、`latestUpdates`、`watchlist`、`sources` 與 `changelog`。
 
 `app.js` 只負責載入 `data.json` 與渲染頁面，日常更新資料時通常不需要修改程式邏輯。
+
+## 官方資料每日監測
+
+監測腳本位於 `scripts/kosan-monitor.js`，會檢查科三相關官方來源並產生 `monitor-report.md`。
+
+GitHub Actions workflow 位於 `.github/workflows/kosan-monitor.yml`：
+
+- 每天台灣時間約 23:45 自動執行一次。
+- 也可以在 GitHub > Actions > Kosan official source monitor > Run workflow 手動執行。
+- 每次執行後會上傳報告 artifact，並將 `monitor-report.md` commit 回 repository。
+- 若報告顯示「可能有更新，需要人工確認」，請先人工確認官方連結，再更新 `data.json` 與網站內容。

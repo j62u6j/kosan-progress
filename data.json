@@ -660,9 +660,19 @@
       "title": "都市計畫規劃內容及會議資料",
       "text": "細部計畫公展資料、提報內政部都委會審議資料等入口。",
       "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=987&s=226446&sms=9345"
+    },
+    {
+      "title": "GitHub Actions 每日監測報告",
+      "text": "由 GitHub Actions 每日檢查官方來源後產生的最新監測報告。",
+      "url": "monitor-report.md"
     }
   ],
   "changelog": [
+    {
+      "date": "2026.05.18",
+      "title": "改用 GitHub Actions 執行官方資料監測",
+      "text": "新增每日監測 workflow，讓 GitHub 自動執行官方來源檢查、產生監測報告並更新 repository。"
+    },
     {
       "date": "2026.05.16",
       "title": "強化首頁判讀與搜尋效率",
