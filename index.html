@@ -21,7 +21,7 @@
     <meta name="twitter:description" content="整理科三計畫官方公開資料、最新進度、風險燈號與下一步流程。">
     <meta name="twitter:image" content="https://j62u6j.github.io/kosan-progress/og-image.svg">
     <meta name="theme-color" content="#15312d">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260729">
   </head>
   <body>
     <div class="update-banner" id="updateBanner"></div>
@@ -127,22 +127,28 @@
         <div class="risk-grid" id="riskGrid"></div>
       </section>
 
-      <section class="section compact-section" id="latest">
+      <section class="section compact-section tracking-board-section" id="latest">
         <div class="section-heading">
-          <p class="eyebrow">Latest</p>
-          <h2>最新消息</h2>
-          <p>把最新官方進度置頂，讓訪客不用翻完整時間軸也能知道目前卡在哪一步。</p>
+          <p class="eyebrow">Tracking Board</p>
+          <h2>最新進度與待確認看板</h2>
+          <p>左側放已確認的官方最新進度，右側放尚待公告或文件補強的下一步，讓目前狀態與追蹤重點可以一起判讀。</p>
         </div>
-        <div class="latest-grid" id="latestGrid"></div>
-      </section>
-
-      <section class="section compact-section" id="pending">
-        <div class="section-heading">
-          <p class="eyebrow">Pending Check</p>
-          <h2>待確認資訊</h2>
-          <p>把已被提及、但仍需等待正式文件或公告補強的資訊獨立列出，避免和已確認進度混在一起。</p>
+        <div class="tracking-board">
+          <div class="track-panel confirmed-panel">
+            <div class="track-panel-heading">
+              <span>已確認最新進度</span>
+              <strong>官方已公開</strong>
+            </div>
+            <div class="latest-grid" id="latestGrid"></div>
+          </div>
+          <div class="track-panel pending-panel" id="pending">
+            <div class="track-panel-heading">
+              <span>待確認下一步</span>
+              <strong>需持續追蹤</strong>
+            </div>
+            <div class="pending-grid" id="pendingGrid"></div>
+          </div>
         </div>
-        <div class="pending-grid" id="pendingGrid"></div>
       </section>
 
       <section class="section" id="timeline">
@@ -339,6 +345,6 @@
       <p>非官方網站。用途為整理公開資料、視覺化追蹤進度，所有正式判讀仍以政府公告為準。</p>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=20260729"></script>
   </body>
 </html>

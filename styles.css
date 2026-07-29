@@ -971,10 +971,6 @@ main {
   font-weight: 900;
 }
 
-.latest-grid {
-  grid-template-columns: minmax(0, 1.35fr) repeat(2, minmax(0, 0.82fr));
-}
-
 .latest-card {
   min-height: 158px;
   display: flex;
@@ -1033,10 +1029,64 @@ main {
   color: #c9f0d7;
 }
 
-.pending-grid {
+.tracking-board {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.track-panel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.track-panel-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 2px;
+}
+
+.track-panel-heading span {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.track-panel-heading strong {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  color: var(--green-dark);
+  background: rgba(47, 125, 99, 0.1);
+  border-radius: 999px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.pending-panel .track-panel-heading strong {
+  color: var(--gold);
+  background: rgba(185, 135, 43, 0.12);
+}
+
+.tracking-board .latest-grid,
+.tracking-board .pending-grid {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 10px;
+}
+
+.tracking-board .latest-card {
+  min-height: 140px;
+}
+
+.tracking-board .latest-card.primary-latest {
+  min-height: 164px;
 }
 
 .pending-card {
@@ -1082,12 +1132,7 @@ main {
   line-height: 1.55;
 }
 
-#pending {
-  padding-top: 22px;
-}
-
-#pending .section-heading,
-#latest .section-heading {
+.tracking-board-section .section-heading {
   margin-bottom: 18px;
 }
 
@@ -1625,7 +1670,8 @@ footer p {
 @media (max-width: 920px) {
   .hero,
   .split .chart-area,
-  .map-layout {
+  .map-layout,
+  .tracking-board {
     grid-template-columns: 1fr;
   }
 
@@ -1723,6 +1769,16 @@ footer p {
 
   .lead {
     font-size: 16px;
+  }
+
+  .track-panel-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tracking-board .latest-card.primary-latest {
+    min-height: 150px;
   }
 
   .hero-conclusion {
