@@ -12,6 +12,11 @@ const sources = [
     keywords: ["科三", "竹科三期", "新竹科學園區第三期", "內政部都委會"]
   },
   {
+    name: "新竹縣政府重大議題進度頁",
+    url: "https://www.hsinchu.gov.tw/NewsFAQ.aspx?n=148&sms=8652",
+    keywords: ["原科三期計畫", "科三", "第6次專案小組", "內政部都委會大會"]
+  },
+  {
     name: "新竹縣都市計畫網",
     url: "https://urbanplan.hsinchu.gov.tw/",
     keywords: ["科三", "竹科三期", "新竹科學園區第三期"]
@@ -19,9 +24,9 @@ const sources = [
 ];
 
 const knownLatest = {
-  date: "115.04.28",
-  title: "議會質詢更新科三目前進度",
-  url: "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
+  date: "115.06.01",
+  title: "縣府重大議題頁更新科三辦理進度",
+  url: "https://www.hsinchu.gov.tw/NewsFAQ.aspx?n=148&sms=8652"
 };
 
 function stripHtml(html) {
