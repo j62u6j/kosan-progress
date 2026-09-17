@@ -21,18 +21,11 @@
     <meta name="twitter:description" content="整理科三計畫官方公開資料、最新進度、風險燈號與下一步流程。">
     <meta name="twitter:image" content="https://j62u6j.github.io/kosan-progress/og-image.svg">
     <meta name="theme-color" content="#15312d">
-    <link rel="stylesheet" href="styles.css?v=20260917">
+    <link rel="stylesheet" href="styles.css?v=20260917d">
   </head>
   <body>
     <div class="update-banner" id="updateBanner"></div>
-    <aside class="floating-nav" aria-label="快速導覽">
-      <a href="#overview">總覽</a>
-      <a href="#brief">懶人包</a>
-      <a href="#process">流程</a>
-      <a href="#records">文件</a>
-      <a href="#faq">FAQ</a>
-      <button id="backToTop" type="button">回頂端</button>
-    </aside>
+    <button class="back-to-top" id="backToTop" type="button" title="回到頁面頂端" aria-label="回到頁面頂端">↑</button>
     <header class="site-header">
       <nav class="topbar" aria-label="頁面導覽">
         <a class="brand" href="#overview" aria-label="回到總覽">
@@ -41,18 +34,12 @@
         </a>
         <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">目錄</button>
         <div class="nav-links" id="siteNav">
-          <a href="#timeline">進度</a>
-          <a href="#process">流程圖</a>
-          <a href="#forecast">下一步</a>
-          <a href="#map">互動地圖</a>
-          <a href="#brief">懶人包</a>
-          <a href="#topics">議題分類</a>
-          <a href="#records">文件搜尋</a>
-          <a href="#watchlist">提醒</a>
+          <a href="#latest">最新追蹤</a>
+          <a href="#timeline">整體進度</a>
+          <a href="#map">議題與區位</a>
+          <a href="#records">官方文件</a>
           <a href="#faq">FAQ</a>
-          <a href="#landuse">土地配置</a>
-          <a href="#updates">變更紀錄</a>
-          <a href="#sources">來源</a>
+          <a href="#sources">資料說明</a>
         </div>
       </nav>
 
@@ -61,77 +48,57 @@
           <p class="eyebrow">新竹縣政府官方公開資料彙整</p>
           <h1>科三進度追蹤</h1>
           <p class="lead">
-            目前狀態：第 6 次專案小組已審竣，補充資料後送內政部都委會大會。
+            第 6 次專案小組後正在依意見檢討修正，下一個關鍵是補充資料完成並排入內政部都委會大會。
           </p>
-          <div class="hero-conclusion" id="heroConclusion" aria-label="一句話結論"></div>
           <div class="hero-actions">
-            <a class="primary-action" href="#timeline">看整體進度</a>
-            <a class="secondary-action" href="#records">搜尋公開文件</a>
+            <a class="primary-action" href="#latest">查看最新追蹤</a>
+            <a class="secondary-action" href="#timeline">了解完整流程</a>
           </div>
         </div>
 
-        <aside class="status-panel" aria-label="目前狀態摘要">
-          <p class="panel-label">目前狀態</p>
-          <strong>修正後送大會</strong>
-          <span>第 6 次專案小組已審竣，補充資料後送內政部都委會大會</span>
-          <div class="progress-ring" aria-label="概略進度 78%">
-            <svg viewBox="0 0 120 120" role="img">
-              <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
-              <circle class="ring-fg" cx="60" cy="60" r="50"></circle>
-            </svg>
-            <div>
-              <b>78%</b>
-              <small>都市計畫審議流程概略</small>
-            </div>
-          </div>
-          <div class="official-basis" id="officialBasis"></div>
-        </aside>
       </section>
     </header>
 
     <main>
-      <section class="summary-grid" aria-label="計畫摘要">
-        <article>
-          <span class="metric">453.94 公頃</span>
-          <p>主要計畫面積，約 4.54 平方公里</p>
-        </article>
-        <article>
-          <span class="metric">304.38 公頃</span>
-          <p>預計區段徵收開發範圍，約 3.04 平方公里</p>
-        </article>
-        <article>
-          <span class="metric">18,500 人</span>
-          <p>計畫人口</p>
-        </article>
-        <article>
-          <span class="metric">民國 125 年</span>
-          <p>計畫年期</p>
-        </article>
-      </section>
-
-      <section class="section compact-section" id="status">
-        <div class="status-strip" id="statusStrip" aria-label="今日狀態摘要"></div>
-      </section>
-
-      <section class="section compact-section" id="risk">
-        <div class="section-heading">
-          <p class="eyebrow">Risk Signals</p>
-          <h2>風險燈號</h2>
-          <p>用綠、黃、紅快速標示每個面向的狀態。黃燈不代表失敗，而是表示需要持續追蹤官方下一次動作。</p>
+      <section class="overview-dashboard" aria-label="目前狀態與計畫摘要">
+        <aside class="status-panel" aria-label="目前狀態摘要">
+          <div class="status-panel-head">
+            <p class="panel-label">目前程序位置</p>
+            <span class="status-badge">中央審議中</span>
+          </div>
+          <strong>補正資料，準備送大會</strong>
+          <div class="status-next">
+            <span>下一關</span>
+            <b>內政部都委會大會</b>
+            <small>尚未查到正式排案公告</small>
+          </div>
+          <div class="official-basis" id="officialBasis"></div>
+        </aside>
+        <div class="summary-grid" aria-label="計畫摘要">
+          <article>
+            <span class="metric">453.94 公頃</span>
+            <p>主要計畫面積，約 4.54 平方公里</p>
+          </article>
+          <article>
+            <span class="metric">304.38 公頃</span>
+            <p>預計區段徵收開發範圍，約 3.04 平方公里</p>
+          </article>
+          <article>
+            <span class="metric">18,500 人</span>
+            <p>計畫人口</p>
+          </article>
+          <article>
+            <span class="metric">民國 125 年</span>
+            <p>計畫年期</p>
+          </article>
         </div>
-        <div class="signal-legend" aria-label="燈號說明">
-          <span><i class="legend-dot green"></i>綠燈：已完成或資料明確</span>
-          <span><i class="legend-dot yellow"></i>黃燈：需持續追蹤</span>
-          <span><i class="legend-dot red"></i>紅燈：高度不確定或重大風險</span>
-        </div>
-        <div class="risk-grid" id="riskGrid"></div>
       </section>
 
-      <section class="section compact-section tracking-board-section" id="latest">
+      <section class="section tracking-board-section" id="latest">
         <div class="section-heading">
-          <p class="eyebrow">Tracking Board</p>
-          <h2>最新進度與待確認看板</h2>
-          <p>左側放已確認的官方最新進度，右側放尚待公告或文件補強的下一步，讓目前狀態與追蹤重點可以一起判讀。</p>
+          <p class="eyebrow">最新追蹤</p>
+          <h2>官方已確認與接下來要等什麼</h2>
+          <p>已公開的消息與尚未確認的下一步並排呈現，避免把預測誤當成正式進度。</p>
         </div>
         <div class="tracking-board">
           <div class="track-panel confirmed-panel">
@@ -153,37 +120,40 @@
 
       <section class="section" id="timeline">
         <div class="section-heading">
-          <p class="eyebrow">Progress</p>
-          <h2>現在走到哪裡</h2>
-          <p>依官方「執行進度」整理，將已完成、目前卡點與下一步分開顯示。</p>
+          <p class="eyebrow">整體進度</p>
+          <h2>五個階段看懂目前位置</h2>
+          <p>主流程只保留關鍵節點；需要查核時，再展開完整歷史與風險說明。</p>
         </div>
         <div class="stage-track" id="stageTrack"></div>
-        <div class="timeline" id="timelineList"></div>
-      </section>
-
-      <section class="section" id="forecast">
-        <div class="section-heading">
-          <p class="eyebrow">Next Steps</p>
-          <h2>接下來可能怎麼走</h2>
-          <p>以下是依都市計畫審議流程與官方目前狀態整理的下一步預測，屬於流程推估，正式結果仍以政府公告為準。</p>
+        <div class="next-step-block">
+          <div class="subsection-heading">
+            <h3>接下來的程序</h3>
+            <p>以下為流程推估，正式結果仍以政府公告為準。</p>
+          </div>
+          <div class="forecast-grid" id="forecastGrid"></div>
         </div>
-        <div class="forecast-grid" id="forecastGrid"></div>
-      </section>
-
-      <section class="section" id="process">
-        <div class="section-heading">
-          <p class="eyebrow">Process Map</p>
-          <h2>法定程序流程圖</h2>
-          <p>把科三目前走過的主要程序串成流程圖，快速看出已完成、目前所在與後續待辦。</p>
+        <div class="progress-details-grid">
+          <details class="detail-panel">
+            <summary>查看完整歷史時間軸</summary>
+            <div class="timeline" id="timelineList"></div>
+          </details>
+          <details class="detail-panel">
+            <summary>查看風險燈號說明</summary>
+            <div class="signal-legend" aria-label="燈號說明">
+              <span><i class="legend-dot green"></i>已完成或資料明確</span>
+              <span><i class="legend-dot yellow"></i>需持續追蹤</span>
+              <span><i class="legend-dot red"></i>高度不確定</span>
+            </div>
+            <div class="risk-grid" id="riskGrid"></div>
+          </details>
         </div>
-        <div class="process-flow" id="processFlow"></div>
       </section>
 
       <section class="section" id="map">
         <div class="section-heading">
-          <p class="eyebrow">Interactive Map</p>
-          <h2>科三區位示意地圖</h2>
-          <p>點選地圖標記查看竹東鎮相關區位與追蹤重點。本圖為資訊整理示意，正式範圍仍以政府公告圖資為準。</p>
+          <p class="eyebrow">議題與區位</p>
+          <h2>計畫在哪裡、涉及哪些問題</h2>
+          <p>地圖為資訊整理示意；法定邊界、面積與土地使用仍以政府公告圖資為準。</p>
         </div>
         <div class="map-layout">
           <div class="schematic-map" id="projectMap" aria-label="科三區位示意地圖"></div>
@@ -195,50 +165,20 @@
             </div>
           </aside>
         </div>
-      </section>
-
-      <section class="section" id="brief">
-        <div class="section-heading">
-          <p class="eyebrow">Quick Brief</p>
-          <h2>科三一頁式懶人包</h2>
-          <p>用最短時間理解科三在哪裡、走到哪一步、接下來看什麼，以及哪些議題最需要追蹤。</p>
-        </div>
-        <div class="brief-grid" id="briefGrid"></div>
-      </section>
-
-      <section class="section" id="topics">
-        <div class="section-heading">
-          <p class="eyebrow">Issue Guide</p>
-          <h2>議題分類懶人頁</h2>
-          <p>把科三資料拆成幾個主要議題，每一類都標示目前狀態與建議追蹤重點。</p>
-        </div>
-        <div class="topic-grid" id="topicGrid"></div>
-      </section>
-
-      <section class="section compact-section" id="watchlist">
-        <div class="section-heading">
-          <p class="eyebrow">Watchlist</p>
-          <h2>重要日期提醒</h2>
-          <p>列出接下來最需要追蹤的官方節點。若官方尚未公告日期，先標示為「待公告」。</p>
-        </div>
-        <div class="watchlist" id="watchlistGrid"></div>
-      </section>
-
-      <section class="section split" id="landuse">
-        <div class="section-heading">
-          <p class="eyebrow">Land Use</p>
-          <h2>規劃內容一眼看</h2>
-          <p>官方草案以生活、產業、服務機能並進為方向，產業專用區原則朝低污染、資訊研發及農業生技等類型。</p>
-        </div>
-        <div class="chart-area">
-          <div class="bar-chart" id="landUseChart" aria-label="土地使用規劃長條圖"></div>
-          <div class="notes">
-            <h3>關鍵提醒</h3>
-            <ul>
-              <li>計畫區位於竹東鎮頭重里、二重里、三重里及柯湖里部分地區。</li>
-              <li>因位於自來水水質水量保護區，產業類別須符合自來水法限制。</li>
-              <li>官方 FAQ 說明污水規劃將設污水處理空間，處理後以專管排至湳雅取水口下游。</li>
-            </ul>
+        <div class="insight-layout">
+          <div>
+            <div class="subsection-heading">
+              <h3>土地使用概況</h3>
+              <p>面積換算同步顯示平方公里，方便快速理解規模。</p>
+            </div>
+            <div class="bar-chart" id="landUseChart" aria-label="土地使用規劃長條圖"></div>
+          </div>
+          <div>
+            <div class="subsection-heading">
+              <h3>六項關鍵議題</h3>
+              <p>每項議題只保留目前狀態與追蹤重點。</p>
+            </div>
+            <div class="topic-grid compact-topics" id="topicGrid"></div>
           </div>
         </div>
       </section>
@@ -246,7 +186,7 @@
       <section class="section" id="records">
         <div class="section-heading records-heading">
           <div>
-            <p class="eyebrow">Document Search</p>
+          <p class="eyebrow">官方文件</p>
             <h2>政府公開文件搜尋</h2>
             <p>用關鍵字或分類快速找到公開展覽、會議節點、審議資料入口與 FAQ。</p>
           </div>
@@ -307,37 +247,29 @@
 
       <section class="section source-section" id="sources">
         <div class="section-heading">
-          <p class="eyebrow">Sources</p>
-          <h2>官方資料來源</h2>
-          <p>本頁資料以官方公開頁面為準。若官方頁面更新，只需同步更新 `data.json` 的資料內容。</p>
+          <p class="eyebrow">資料說明</p>
+          <h2>來源、更新紀錄與使用說明</h2>
+          <p>以下內容保留完整查核資訊，但預設收合，避免干擾主要閱讀流程。</p>
         </div>
-        <div class="sources" id="sourceList"></div>
-      </section>
-
-      <section class="section source-section" id="updates">
-        <div class="section-heading">
-          <p class="eyebrow">Changelog</p>
-          <h2>網站變更紀錄</h2>
-          <p>記錄每次更新日期、資料來源與調整重點，方便後續查核網站資訊如何演進。</p>
-        </div>
-        <div class="changelog" id="changelogList"></div>
-      </section>
-
-      <section class="section source-section" id="disclaimer">
-        <div class="section-heading">
-          <p class="eyebrow">Notice</p>
-          <h2>免責與資料使用說明</h2>
-          <p>本站為民間整理的公開資訊追蹤頁。完整說明可展開查看。</p>
-        </div>
-        <details class="notice-compact">
-          <summary>查看免責、資料來源與更新原則</summary>
-          <div>
+        <div class="reference-stack">
+          <details class="detail-panel">
+            <summary>官方資料來源</summary>
+            <div class="sources" id="sourceList"></div>
+          </details>
+          <details class="detail-panel">
+            <summary>網站變更紀錄</summary>
+            <div class="changelog" id="changelogList"></div>
+          </details>
+          <details class="detail-panel notice-compact">
+            <summary>免責與資料使用原則</summary>
+            <div>
             <p><strong>非官方網站：</strong>本站不是政府機關或開發單位網站，正式公告、法定文件與程序判讀仍以政府機關發布內容為準。</p>
             <p><strong>資料採用原則：</strong>本站只整理政府或官方公開來源，例如新竹縣政府、內政部都委會、國土管理署與都市計畫網；不以媒體或社群傳聞作為正式進度依據。</p>
             <p><strong>更新頻率：</strong>本站已設定每日官方資料監測，但內容更新仍需人工確認與發布。</p>
             <p><strong>地圖與流程：</strong>互動地圖為區位示意，不代表法定邊界或精確地籍範圍；流程圖為公開資料整理。</p>
-          </div>
-        </details>
+            </div>
+          </details>
+        </div>
       </section>
     </main>
 
@@ -345,6 +277,6 @@
       <p>非官方網站。用途為整理公開資料、視覺化追蹤進度，所有正式判讀仍以政府公告為準。</p>
     </footer>
 
-    <script src="app.js?v=20260917"></script>
+    <script src="app.js?v=20260917b"></script>
   </body>
 </html>

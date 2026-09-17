@@ -1,7 +1,7 @@
 let stages, statusSummary, dataStatus, siteSummary, officialBasis, riskSignals, briefCards, topicGuides, latestUpdates, pendingItems, quickKeywords, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog;
 
 async function loadSiteData() {
-  const response = await fetch('data.json?v=20260917');
+  const response = await fetch('data.json?v=20260917b');
   if (!response.ok) {
     throw new Error(`Unable to load data.json: ${response.status}`);
   }
@@ -446,20 +446,15 @@ function setupActiveNavigation() {
 
 function renderAll() {
   renderUpdateBanner();
-  renderHeroConclusion();
   renderOfficialBasis();
-  renderStatusSummary();
   renderLatestUpdates();
   renderPendingItems();
-  renderBriefCards();
   renderTopicGuides();
   renderRisks();
   renderStages();
   renderTimeline();
   renderForecasts();
-  renderProcessFlow();
   renderProjectMap();
-  renderWatchlist();
   renderLandUse();
   setupRecordFilters();
   renderQuickKeywords();
