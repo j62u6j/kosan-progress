@@ -39,8 +39,8 @@
     },
     {
       "label": "最新官方更新",
-      "value": "115.04.28",
-      "text": "議會質詢更新目前進度"
+      "value": "115.06.01",
+      "text": "縣府重大議題頁更新"
     },
     {
       "label": "最該追蹤",
@@ -49,9 +49,9 @@
     }
   ],
   "dataStatus": {
-    "pageUpdated": "2026.05.16",
-    "latestOfficialDate": "115.04.28",
-    "latestOfficialTitle": "議會質詢更新科三目前進度",
+    "pageUpdated": "2026.09.17",
+    "latestOfficialDate": "115.06.01",
+    "latestOfficialTitle": "縣府重大議題頁更新科三辦理進度",
     "monitorText": "每日自動檢查官方來源"
   },
   "siteSummary": {
@@ -60,11 +60,11 @@
   },
   "officialBasis": {
     "label": "最新官方依據",
-    "date": "115.04.28",
-    "title": "新竹縣政府議會質詢回應",
-    "text": "縣府表示第 6 次專案小組已審竣，補充資料後將送內政部都委會大會；本站以此作為目前進度判讀依據。",
-    "source": "查看新竹縣政府新聞",
-    "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
+    "date": "115.06.01",
+    "title": "新竹縣政府重大議題進度頁",
+    "text": "縣府最新進度頁表示，115 年 3 月 31 日第 6 次專案小組審議後，仍需依小組意見檢討，再提內政部都委會大會審議；尚未查到正式排會或通過公告。",
+    "source": "查看新竹縣政府重大議題頁",
+    "url": "https://www.hsinchu.gov.tw/NewsFAQ.aspx?n=148&sms=8652"
   },
   "riskSignals": [
     {
@@ -158,25 +158,25 @@
   ],
   "latestUpdates": [
     {
+      "date": "115.06.01",
+      "title": "縣府更新科三官方辦理進度",
+      "text": "重大議題頁更新確認：第 6 次專案小組後，縣府依小組意見檢討，後續再提內政部都委會大會；目前尚未公布正式排會結果。",
+      "source": "新竹縣政府重大議題",
+      "url": "https://www.hsinchu.gov.tw/NewsFAQ.aspx?n=148&sms=8652"
+    },
+    {
+      "date": "115.05.04",
+      "title": "議會質詢再次確認補件後送大會",
+      "text": "縣府於議會質詢回應，目前只等資料補充後送至國土署，再送內政部都委會大會審議；未宣布已排入大會。",
+      "source": "新竹縣政府新聞",
+      "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283463&sms=8603"
+    },
+    {
       "date": "115.04.28",
       "title": "議會質詢確認目前進度",
       "text": "縣府回應第 6 次專案小組已審竣，目前補充資料後將送內政部都委會大會；若大會通過，科三案將可向前邁進。",
       "source": "新竹縣政府新聞",
       "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
-    },
-    {
-      "date": "115.04.17",
-      "title": "施政報告說明送大會前程序",
-      "text": "縣長於施政報告表示，第 6 次專案小組取得共識，縣府修正後送內政部確認，再提請都委會大會審議。",
-      "source": "新竹縣政府新聞",
-      "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=282429&sms=8603"
-    },
-    {
-      "date": "115.04.08",
-      "title": "縣府澄清科三案無須聽證",
-      "text": "縣府說明科三案與台知案流程不同；科三修正後將送內政部大會，目前依既定法定程序推進。",
-      "source": "新竹縣政府新聞",
-      "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=2715&s=281799"
     }
   ],
   "pendingItems": [
@@ -195,11 +195,11 @@
       "next": "等待縣府或中央都市計畫相關系統更新附件。"
     },
     {
-      "title": "今年 5 月後是否有新進度",
-      "status": "待查核",
+      "title": "大會是否已正式排案",
+      "status": "尚未查到",
       "level": "muted",
-      "text": "若有新的會議或新聞，仍需以官方頁面、議程或會議紀錄確認後再納入正式進度。",
-      "next": "每日監測官方新聞、都市計畫網與內政部都委會公開資料。"
+      "text": "截至 2026 年 9 月 17 日查核，最新縣府進度頁仍寫後續提大會審議，尚未找到正式議程或通過紀錄。",
+      "next": "持續核對內政部都委會議程、會議紀錄及縣府重大議題頁。"
     }
   ],
   "quickKeywords": [
@@ -432,6 +432,18 @@
       "date": "115.04.28",
       "title": "議會質詢再確認目前狀態",
       "text": "縣府表示第 6 次專案小組已經審竣，目前補充資料後將送大會；如大會通過將可向前邁進。",
+      "badge": "已確認"
+    },
+    {
+      "date": "115.05.04",
+      "title": "議會質詢再次說明科三進度",
+      "text": "縣府表示目前只等資料補充後送國土署，再送內政部都委會大會審議。",
+      "badge": "已確認"
+    },
+    {
+      "date": "115.06.01",
+      "title": "縣府重大議題頁更新辦理進度",
+      "text": "官方頁面仍列為依第 6 次專案小組意見檢討後，再提內政部都委會大會審議。",
       "badge": "目前",
       "pending": true
     }
@@ -575,6 +587,28 @@
       "recent": true
     },
     {
+      "date": "115.05.04",
+      "title": "議員林昭錡質詢科三進度",
+      "text": "縣府回應目前只等資料補充後送至國土署，再送內政部都委會大會審議；本次未宣布已正式排會。",
+      "category": "county",
+      "type": "議會質詢",
+      "credibility": "official-news",
+      "risk": "yellow",
+      "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283463&sms=8603",
+      "recent": true
+    },
+    {
+      "date": "115.06.01",
+      "title": "重大議題頁更新科三辦理進度",
+      "text": "縣府最新進度頁確認，第 6 次專案小組後仍在依意見檢討，後續再提內政部都委會大會審議。",
+      "category": "source",
+      "type": "官方進度",
+      "credibility": "official-record",
+      "risk": "yellow",
+      "url": "https://www.hsinchu.gov.tw/NewsFAQ.aspx?n=148&sms=8652",
+      "recent": true
+    },
+    {
       "date": "109.04.02",
       "title": "都市計畫規劃內容及會議資料入口",
       "text": "新竹縣政府提供細部計畫公展資料、提報內政部都委會審議資料與現行分區查詢連結。",
@@ -657,6 +691,16 @@
       "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283364"
     },
     {
+      "title": "115-05-04 科三進度議會質詢",
+      "text": "縣府回應補充資料後送國土署，再送內政部都委會大會審議。",
+      "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=153&s=283463&sms=8603"
+    },
+    {
+      "title": "115-06-01 科三重大議題進度頁",
+      "text": "縣府最新辦理進度，確認案件尚待依小組意見檢討後提都委會大會。",
+      "url": "https://www.hsinchu.gov.tw/NewsFAQ.aspx?n=148&sms=8652"
+    },
+    {
       "title": "都市計畫規劃內容及會議資料",
       "text": "細部計畫公展資料、提報內政部都委會審議資料等入口。",
       "url": "https://www.hsinchu.gov.tw/News_Content.aspx?n=987&s=226446&sms=9345"
@@ -668,6 +712,11 @@
     }
   ],
   "changelog": [
+    {
+      "date": "2026.09.17",
+      "title": "查核並更新至 115 年 6 月官方進度",
+      "text": "新增 5 月 4 日議會質詢與 6 月 1 日重大議題進度頁；確認尚未查到內政部都委會大會正式排案或通過公告。"
+    },
     {
       "date": "2026.05.18",
       "title": "改用 GitHub Actions 執行官方資料監測",
