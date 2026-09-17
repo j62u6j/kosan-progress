@@ -1,7 +1,7 @@
 let stages, statusSummary, dataStatus, siteSummary, officialBasis, riskSignals, briefCards, topicGuides, latestUpdates, pendingItems, quickKeywords, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog;
 
 async function loadSiteData() {
-  const response = await fetch('data.json?v=20260917b');
+  const response = await fetch('data.json?v=20260917e');
   if (!response.ok) {
     throw new Error(`Unable to load data.json: ${response.status}`);
   }
