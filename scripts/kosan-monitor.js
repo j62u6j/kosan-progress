@@ -20,13 +20,18 @@ const sources = [
     name: "新竹縣都市計畫網",
     url: "https://urbanplan.hsinchu.gov.tw/",
     keywords: ["科三", "竹科三期", "新竹科學園區第三期"]
+  },
+  {
+    name: "內政部都委會審議案件情形",
+    url: "https://www.nlma.gov.tw/ch/moicommittee/comm2/68",
+    keywords: ["待提會審議案件", "專案小組聽取簡報案件", "審決案件"]
   }
 ];
 
 const knownLatest = {
-  date: "115.06.01",
-  title: "縣府重大議題頁更新科三辦理進度",
-  url: "https://www.hsinchu.gov.tw/NewsFAQ.aspx?n=148&sms=8652"
+  date: "115.09.15",
+  title: "內政部都委會第 1109 次審議案件儀表板",
+  url: "https://www.nlma.gov.tw/uploads/files/4030297908ae2488b333e7a03371cf18.pdf"
 };
 
 function stripHtml(html) {
@@ -131,7 +136,7 @@ function buildReport(results) {
   lines.push("## 建議動作");
   lines.push(possibleNewDates.length > 0
     ? "- 先人工確認新日期資料內容；若確認與科三進度相關，再更新 data.json 的最新消息、文件卡、待確認資訊與變更紀錄。"
-    : "- 暫不需要更新網站內容。若你知道有 5 月以後資料，請提供網址或截圖再人工補查。");
+    : "- 暫不需要更新網站內容。若你看到更新的官方公告、會議議程或紀錄，請提供網址或截圖再人工補查。");
 
   return lines.join("\n");
 }
