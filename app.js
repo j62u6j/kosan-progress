@@ -1,7 +1,7 @@
 let stages, statusSummary, dataStatus, siteSummary, officialBasis, riskSignals, briefCards, topicGuides, latestUpdates, pendingItems, quickKeywords, forecasts, processSteps, mapAreas, watchlist, timeline, landUse, records, faqs, sources, changelog;
 
 async function loadSiteData() {
-  const response = await fetch('data.json?v=20261004a');
+  const response = await fetch('data.json?v=20261010a');
   if (!response.ok) {
     throw new Error(`Unable to load data.json: ${response.status}`);
   }
@@ -44,7 +44,7 @@ function renderUpdateBanner() {
   const target = document.querySelector("#updateBanner");
   target.innerHTML = `
     <div>
-      <span>資料最後更新：${dataStatus.pageUpdated}</span>
+      <span>資料最後查核：${dataStatus.pageUpdated}</span>
       <span>最新官方資料：${dataStatus.latestOfficialDate} ${dataStatus.latestOfficialTitle}</span>
       <span>監測狀態：${dataStatus.monitorText}</span>
     </div>
